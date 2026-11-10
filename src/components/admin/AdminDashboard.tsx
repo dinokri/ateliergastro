@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRestaurant } from '../../context/RestaurantContext';
-import { useAuth } from '../../context/AuthContext';
+import { AuthProvider, useAuth } from '../../context/AuthContext';
 import { MenuItem, Order, OrderStatus, Reservation, ReservationStatus, RestaurantSettings } from '../../types/restaurant';
 import { 
   LayoutDashboard, 
@@ -29,7 +29,7 @@ import {
   LogIn
 } from 'lucide-react';
 
-export const AdminDashboard: React.FC = () => {
+const AdminDashboardContent: React.FC = () => {
   const {
     language,
     settings,
@@ -1201,5 +1201,13 @@ export const AdminDashboard: React.FC = () => {
       )}
 
     </div>
+  );
+};
+
+export const AdminDashboard: React.FC = () => {
+  return (
+    <AuthProvider>
+      <AdminDashboardContent />
+    </AuthProvider>
   );
 };

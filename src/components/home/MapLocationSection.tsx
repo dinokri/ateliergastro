@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { useRestaurant } from '../../context/RestaurantContext';
-import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
-import { MapPin, Navigation, ExternalLink, Clock, Phone, Car } from 'lucide-react';
+import { MapPin, Navigation, ExternalLink, Clock, Phone, Car, Layers } from 'lucide-react';
 import firebaseConfig from '../../../firebase-applet-config.json';
+
+// Code-split Google Maps to eliminate ~218 KiB Maps JS and StaticMap requests from initial page load
+const InteractiveGoogleMap = lazy(() => import('./InteractiveGoogleMap'));
 
 export const MapLocationSection: React.FC = () => {
   const { language, settings } = useRestaurant();
   const [mapError, setMapError] = useState(false);
+  const [isMapRequested, setIsMapRequested] = useState(false);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
 
   // Gracefully catch Google Maps authorization errors without throwing unhandled exceptions
-  React.useEffect(() => {
+  useEffect(() => {
     const prevAuthFailure = (window as unknown as { gm_authFailure?: () => void }).gm_authFailure;
     (window as unknown as { gm_authFailure?: () => void }).gm_authFailure = () => {
       setMapError(true);
@@ -21,6 +25,27 @@ export const MapLocationSection: React.FC = () => {
       (window as unknown as { gm_authFailure?: () => void }).gm_authFailure = prevAuthFailure;
     };
   }, []);
+
+  // IntersectionObserver: automatically request map when user scrolls near the section
+  useEffect(() => {
+    if (isMapRequested) return;
+    const target = mapContainerRef.current;
+    if (!target) return;
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            setIsMapRequested(true);
+            observer.disconnect();
+          }
+        },
+        { rootMargin: '200px' }
+      );
+      observer.observe(target);
+      return () => observer.disconnect();
+    }
+  }, [isMapRequested]);
 
   // Use configured key or demo fallback
   const mapsApiKey = 
@@ -53,7 +78,7 @@ export const MapLocationSection: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Information Card (4 cols) */}
+          {/* Information Card (5 cols) */}
           <div className="lg:col-span-5 bg-white rounded-2xl p-6 sm:p-8 border border-[#E9E1D4] shadow-md flex flex-col justify-between">
             <div className="space-y-6">
               
@@ -61,7 +86,7 @@ export const MapLocationSection: React.FC = () => {
                 <h3 className="font-serif text-2xl font-semibold text-[#20221F]">
                   {settings.name}
                 </h3>
-                <p className="text-xs text-[#59634A] uppercase tracking-wider font-medium mt-0.5">
+                <p className="text-xs text-[#3F4734] uppercase tracking-wider font-medium mt-0.5">
                   Sarajevo, Bosna i Hercegovina
                 </p>
               </div>
@@ -86,7 +111,7 @@ export const MapLocationSection: React.FC = () => {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Clock className="w-4 h-4 text-[#59634A] shrink-0 mt-0.5" />
+                  <Clock className="w-4 h-4 text-[#3F4734] shrink-0 mt-0.5" />
                   <div>
                     <span className="font-semibold block text-[#20221F]">
                       {language === 'bs' ? 'Svaki dan: 08:00 - 23:00 / 00:00' : 'Daily: 08:00 - 23:00 / 00:00'}
@@ -98,7 +123,7 @@ export const MapLocationSection: React.FC = () => {
                 </div>
 
                 <div className="flex items-start gap-3 pt-1">
-                  <Car className="w-4 h-4 text-[#59634A] shrink-0 mt-0.5" />
+                  <Car className="w-4 h-4 text-[#3F4734] shrink-0 mt-0.5" />
                   <span className="text-xs text-[#20221F]/70">
                     {language === 'bs' 
                       ? 'Dostupan parking u obližnjoj garaži Sarajevo City Centar / Vijećnica (3 min hoda).'
@@ -127,55 +152,86 @@ export const MapLocationSection: React.FC = () => {
                 rel="noreferrer"
                 className="py-3 px-4 rounded-xl border border-[#E9E1D4] hover:bg-[#F7F4ED] text-[#20221F] text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
               >
-                <ExternalLink className="w-4 h-4 text-[#59634A]" />
+                <ExternalLink className="w-4 h-4 text-[#3F4734]" />
                 <span>Google Maps</span>
               </a>
             </div>
 
           </div>
 
-          {/* Interactive Map (7 cols) */}
-          <div className="lg:col-span-7 h-[420px] rounded-2xl overflow-hidden border border-[#E9E1D4] shadow-md relative bg-[#E9E1D4]/40">
-            {mapsApiKey && !mapError ? (
-              <APIProvider apiKey={mapsApiKey} language="bs" region="BA">
-                <Map
-                  mapId="DEMO_MAP_ID"
-                  defaultCenter={position}
-                  defaultZoom={15}
-                  gestureHandling="cooperative"
-                  disableDefaultUI={false}
-                  className="w-full h-full min-h-[420px]"
-                  style={{ width: '100%', height: '100%' }}
-                  internalUsageAttributionIds={['gmp_mcp_codeassist_v1_aistudio']}
-                >
-                  <AdvancedMarker position={position} title={settings.name}>
-                    <Pin
-                      background="#B66F52"
-                      borderColor="#20221F"
-                      glyphColor="#FFFFFF"
-                      scale={1.2}
+          {/* Interactive Map Container (7 cols) with Deferred On-Demand Loading */}
+          <div
+            ref={mapContainerRef}
+            className="lg:col-span-7 h-[420px] rounded-2xl overflow-hidden border border-[#E9E1D4] shadow-md relative bg-[#E9E1D4]/40"
+          >
+            {isMapRequested ? (
+              <Suspense
+                fallback={
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-[#E9E1D4]/40 text-stone-600 space-y-2">
+                    <div className="w-8 h-8 rounded-full border-2 border-[#59634A] border-t-transparent animate-spin" />
+                    <span className="text-xs font-medium">
+                      {language === 'bs' ? 'Učitavanje Google Mape...' : 'Loading Google Maps...'}
+                    </span>
+                  </div>
+                }
+              >
+                {mapsApiKey && !mapError ? (
+                  <InteractiveGoogleMap
+                    apiKey={mapsApiKey}
+                    position={position}
+                    name={settings.name}
+                    onError={() => setMapError(true)}
+                  />
+                ) : (
+                  /* Fallback Interactive Embed Map */
+                  <div className="w-full h-full relative">
+                    <iframe
+                      title="Atelier Bistro Sarajevo Map Location"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      loading="lazy"
+                      allowFullScreen
+                      referrerPolicy="no-referrer-when-downgrade"
+                      src={`https://maps.google.com/maps?q=${settings.lat},${settings.lng}&z=15&output=embed`}
                     />
-                  </AdvancedMarker>
-                </Map>
-              </APIProvider>
+                  </div>
+                )}
+              </Suspense>
             ) : (
-              /* Fallback Interactive Embed Map */
-              <div className="w-full h-full relative">
-                <iframe
-                  title="Atelier Bistro Sarajevo Map Location"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                  allowFullScreen
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src={`https://maps.google.com/maps?q=${settings.lat},${settings.lng}&z=15&output=embed`}
-                />
+              /* Lightweight Location Card Preview before user reaches or requests map */
+              <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-[#E9E1D4]/50 to-[#E9E1D4]/20 relative">
+                <div className="w-14 h-14 rounded-2xl bg-white shadow-md border border-[#E9E1D4] flex items-center justify-center text-[#B66F52] mb-4">
+                  <MapPin className="w-7 h-7" />
+                </div>
+                <h4 className="font-serif text-xl font-semibold text-[#20221F] mb-1">
+                  Atelier Bistro Sarajevo
+                </h4>
+                <p className="text-xs text-[#20221F]/70 max-w-sm mb-5 leading-relaxed">
+                  Obala Kulina bana 24, Stari Grad &bull; Pored Latinske ćuprije
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <button
+                    onClick={() => setIsMapRequested(true)}
+                    className="px-5 py-2.5 rounded-xl bg-[#20221F] hover:bg-[#B66F52] text-white text-xs font-semibold tracking-wider uppercase transition-colors shadow-sm flex items-center gap-2"
+                  >
+                    <Layers className="w-3.5 h-3.5" />
+                    <span>{language === 'bs' ? 'Prikaži Interaktivnu Mapu' : 'Show Interactive Map'}</span>
+                  </button>
+                  <a
+                    href={directionsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-4 py-2.5 rounded-xl border border-[#20221F]/20 hover:bg-white text-[#20221F] text-xs font-semibold transition-colors"
+                  >
+                    {language === 'bs' ? 'Upute za vožnju' : 'Directions'}
+                  </a>
+                </div>
               </div>
             )}
 
             {/* In-Map Info Overlay Badge */}
-            <div className="absolute top-3 left-3 bg-[#20221F]/90 backdrop-blur-md text-[#F7F4ED] p-2.5 rounded-xl shadow-lg border border-[#3F4734] pointer-events-none hidden sm:block max-w-xs">
+            <div className="absolute top-3 left-3 bg-[#20221F]/90 backdrop-blur-md text-[#F7F4ED] p-2.5 rounded-xl shadow-lg border border-[#3F4734] pointer-events-none hidden sm:block max-w-xs z-10">
               <div className="font-serif text-sm font-semibold">{settings.name}</div>
               <div className="text-[10px] text-[#E9E1D4]/80">{settings.address}, Sarajevo</div>
             </div>

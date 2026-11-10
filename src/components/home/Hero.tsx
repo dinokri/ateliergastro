@@ -14,8 +14,8 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentTab }) => {
       {/* Editorial High-Resolution Background Imagery */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80"
-          srcSet="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=640&auto=format&fit=crop&q=75 640w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1080&auto=format&fit=crop&q=80 1080w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&auto=format&fit=crop&q=85 1920w"
+          src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=828&auto=format&fit=crop&q=65"
+          srcSet="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=480&auto=format&fit=crop&q=60 480w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=640&auto=format&fit=crop&q=62 640w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=828&auto=format&fit=crop&q=65 828w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1080&auto=format&fit=crop&q=68 1080w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1440&auto=format&fit=crop&q=70 1440w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&auto=format&fit=crop&q=75 1920w"
           sizes="100vw"
           width="1920"
           height="1080"

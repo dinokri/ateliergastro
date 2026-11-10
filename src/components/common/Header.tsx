@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useRestaurant } from '../../context/RestaurantContext';
-import { useAuth } from '../../context/AuthContext';
 import { 
   ShoppingBag, 
   Menu as MenuIcon, 
@@ -21,7 +20,6 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ currentTab, setCurrentTab, openQRModal }) => {
   const { language, setLanguage, cart, setIsCartOpen, activeTableId, settings } = useRestaurant();
-  const { isAdmin } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const totalCartCount = cart.reduce((sum, item) => sum + item.quantity, 0);

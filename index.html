@@ -26,15 +26,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Critical Mobile & Desktop LCP Image Preload with Responsive srcSet -->
+    <!-- Critical Mobile & Desktop LCP Image Preload with 6 Granular Responsive Candidates -->
     <link
       rel="preload"
       as="image"
-      href="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&amp;auto=format&amp;fit=crop&amp;q=80"
-      imagesrcset="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=640&amp;auto=format&amp;fit=crop&amp;q=75 640w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1080&amp;auto=format&amp;fit=crop&amp;q=80 1080w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&amp;auto=format&amp;fit=crop&amp;q=85 1920w"
+      href="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=828&amp;auto=format&amp;fit=crop&amp;q=65"
+      imagesrcset="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=480&amp;auto=format&amp;fit=crop&amp;q=60 480w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=640&amp;auto=format&amp;fit=crop&amp;q=62 640w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=828&amp;auto=format&amp;fit=crop&amp;q=65 828w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1080&amp;auto=format&amp;fit=crop&amp;q=68 1080w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1440&amp;auto=format&amp;fit=crop&amp;q=70 1440w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&amp;auto=format&amp;fit=crop&amp;q=75 1920w"
       imagesizes="100vw"
       fetchpriority="high"
     >
+
+    <!-- Critical Above-the-fold inline styling -->
+    <style>
+      :root { --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; --font-serif: 'Cormorant Garamond', Georgia, serif; }
+      body { margin: 0; background-color: #F7F4ED; color: #20221F; font-family: var(--font-sans); }
+      #root { min-height: 100vh; display: flex; flex-direction: column; }
+    </style>
 
     <!-- Non-render-blocking Web Fonts -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">

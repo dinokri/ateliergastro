@@ -4,7 +4,6 @@
  */
 
 import React, { useState, useEffect, Suspense, lazy } from 'react';
-import { AuthProvider } from './context/AuthContext';
 import { RestaurantProvider, useRestaurant } from './context/RestaurantContext';
 import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
@@ -229,10 +228,8 @@ function MainApp() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <RestaurantProvider>
-        <MainApp />
-      </RestaurantProvider>
-    </AuthProvider>
+    <RestaurantProvider>
+      <MainApp />
+    </RestaurantProvider>
   );
 }

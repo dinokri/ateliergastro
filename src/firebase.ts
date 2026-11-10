@@ -1,14 +1,29 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
-import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
 import firebaseConfig from '../firebase-applet-config.json';
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 
-// Initialize Firestore with specific database ID from config
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
+// Lazy singletons for Auth and Firestore to prevent synchronous execution on initial bundle load
+let _auth: any = null;
+let _googleProvider: any = null;
+
+export async function getAuthInstance() {
+  if (!_auth) {
+    const { getAuth, GoogleAuthProvider } = await import('firebase/auth');
+    _auth = getAuth(app);
+    _googleProvider = new GoogleAuthProvider();
+  }
+  return { auth: _auth, googleProvider: _googleProvider };
+}
+
+let _db: any = null;
+export async function getDb() {
+  if (!_db) {
+    const { getFirestore } = await import('firebase/firestore');
+    _db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+  }
+  return _db;
+}
 
 export enum OperationType {
   CREATE = 'create',
@@ -35,29 +50,10 @@ export interface FirestoreErrorInfo {
 export function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null) {
   const errInfo: FirestoreErrorInfo = {
     error: error instanceof Error ? error.message : String(error),
-    authInfo: {
-      userId: auth.currentUser?.uid,
-      email: auth.currentUser?.email,
-      emailVerified: auth.currentUser?.emailVerified,
-      isAnonymous: auth.currentUser?.isAnonymous,
-      tenantId: auth.currentUser?.tenantId,
-    },
+    authInfo: {},
     operationType,
     path,
   };
   console.warn('Firestore Operation Notice: ', JSON.stringify(errInfo));
   throw new Error(JSON.stringify(errInfo));
-}
-
-// Connectivity test
-export async function testFirestoreConnection(): Promise<boolean> {
-  try {
-    await getDocFromServer(doc(db, 'restaurantSettings', 'global'));
-    return true;
-  } catch (err: unknown) {
-    if (err instanceof Error && err.message.includes('offline')) {
-      console.warn('Firestore is running in offline/cached mode');
-    }
-    return false;
-  }
 }

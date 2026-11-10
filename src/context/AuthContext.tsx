@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { User, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
-import { auth, googleProvider } from '../firebase';
+import type { User } from 'firebase/auth';
+import { getAuthInstance } from '../firebase';
 
 interface AuthContextType {
   user: User | null;
@@ -25,11 +25,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   });
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setIsLoading(false);
-    });
-    return () => unsubscribe();
+    let unsubscribe: (() => void) | undefined;
+    
+    getAuthInstance()
+      .then(({ auth }) => {
+        import('firebase/auth').then(({ onAuthStateChanged }) => {
+          unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+            setIsLoading(false);
+          });
+        });
+      })
+      .catch((err) => {
+        console.warn('Firebase Auth initialization notice:', err);
+        setIsLoading(false);
+      });
+
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   const isAdmin: boolean = 
@@ -40,6 +54,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const loginWithGoogle = async () => {
     try {
+      const { auth, googleProvider } = await getAuthInstance();
+      const { signInWithPopup } = await import('firebase/auth');
       await signInWithPopup(auth, googleProvider);
     } catch (err) {
       console.error('Google Sign-In failed', err);
@@ -49,6 +65,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async () => {
     try {
+      const { auth } = await getAuthInstance();
+      const { signOut } = await import('firebase/auth');
       await signOut(auth);
       setIsSimulatedAdmin(false);
       localStorage.removeItem('atelier_admin_session');

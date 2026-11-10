@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import {
   CartItem,
+  ItemExtra,
   Language,
   MenuCategory,
   MenuItem,
   Order,
   OrderStatus,
+  OrderType,
   Promotion,
   Reservation,
   ReservationStatus,
@@ -19,6 +21,7 @@ import {
   INITIAL_SETTINGS,
 } from '../data/seedData';
 import {
+  calculateItemUnitPrice,
   calculateCartSubtotal,
   calculateDeliveryFee,
   calculateOrderTotal,
@@ -26,16 +29,16 @@ import {
   generateReservationNumber,
   validateAndApplyDiscount,
 } from '../utils/pricing';
-import { db } from '../firebase';
 import {
-  collection,
-  doc,
-  setDoc,
-  getDoc,
-  getDocs,
-  updateDoc,
-  onSnapshot,
-} from 'firebase/firestore';
+  syncInitialDataFromFirestore,
+  saveOrderToFirestore,
+  saveReservationToFirestore,
+  saveEventInquiryToFirestore,
+  saveNewsletterSubscription,
+  saveMenuItemToFirestore,
+  deleteMenuItemFromFirestore,
+  saveSettingsToFirestore,
+} from '../services/firestoreService';
 
 export interface ToastMessage {
   id: string;
@@ -60,22 +63,25 @@ interface RestaurantContextType {
     item: MenuItem,
     quantity?: number,
     variantId?: string,
-    extrasIds?: string[],
-    instructions?: string
+    extraIds?: string[],
+    specialInstructions?: string
   ) => void;
-  updateCartQuantity: (cartItemId: string, delta: number) => void;
   removeFromCart: (cartItemId: string) => void;
+  updateCartQuantity: (cartItemId: string, delta: number) => void;
   clearCart: () => void;
-  appliedPromo: Promotion | null;
-  applyPromoCode: (code: string) => { success: boolean; message: string };
-  removePromoCode: () => void;
   cartSubtotal: number;
   deliveryFee: number;
   discountAmount: number;
   cartTotal: number;
+  finalTotal: number;
+  promotions: Promotion[];
+  appliedPromo: Promotion | null;
+  applyPromoCode: (code: string) => { success: boolean; message: string };
+  removePromoCode: () => void;
   orders: Order[];
-  createOrder: (orderData: Omit<Order, 'orderNumber' | 'status' | 'createdAt' | 'updatedAt'>) => Promise<Order>;
-  updateOrderStatus: (orderNumber: string, newStatus: OrderStatus, notes?: string) => Promise<void>;
+  submitOrder: (orderData: Omit<Order, 'id' | 'orderNumber' | 'status' | 'createdAt' | 'updatedAt'>) => Promise<Order>;
+  createOrder: (orderData: Omit<Order, 'id' | 'orderNumber' | 'status' | 'createdAt' | 'updatedAt'>) => Promise<Order>;
+  updateOrderStatus: (orderNumber: string, status: OrderStatus, notes?: string) => Promise<void>;
   getOrder: (orderNumber: string) => Order | undefined;
   reservations: Reservation[];
   createReservation: (resData: Omit<Reservation, 'reservationNumber' | 'status' | 'createdAt' | 'updatedAt'>) => Promise<Reservation>;
@@ -184,42 +190,22 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     localStorage.setItem('atelier_event_inquiries', JSON.stringify(eventInquiries));
   }, [eventInquiries]);
 
-  // Firestore background synchronization when available
+  // Firestore synchronization safely deferred to idle time to never block FCP/LCP
   useEffect(() => {
-    let unsubOrders: (() => void) | undefined;
-    let unsubReservations: (() => void) | undefined;
-
-    try {
-      // Sync settings from Firestore if present
-      const settingsRef = doc(db, 'restaurantSettings', 'global');
-      getDoc(settingsRef).then((snap) => {
-        if (snap.exists()) {
-          setSettings(snap.data() as RestaurantSettings);
-        }
-      }).catch(() => {
-        // use local
-      });
-
-      // Sync menu items from Firestore if present
-      getDocs(collection(db, 'menuItems')).then((querySnap) => {
-        if (!querySnap.empty) {
-          const items: MenuItem[] = [];
-          querySnap.forEach((docSnap) => items.push(docSnap.data() as MenuItem));
-          if (items.length > 0) {
-            setMenuItems(items);
-          }
-        }
-      }).catch(() => {
-        // use local
-      });
-    } catch (e) {
-      console.warn('Initial Firestore sync skipped:', e);
-    }
-
-    return () => {
-      unsubOrders?.();
-      unsubReservations?.();
+    const runSync = () => {
+      syncInitialDataFromFirestore(
+        (newSettings) => setSettings(newSettings),
+        (newItems) => setMenuItems(newItems)
+      );
     };
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      const idleId = (window as any).requestIdleCallback(runSync, { timeout: 3000 });
+      return () => (window as any).cancelIdleCallback(idleId);
+    } else {
+      const timer = setTimeout(runSync, 2000);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const addToast = (type: 'success' | 'error' | 'info', title: string, message: string) => {
@@ -239,84 +225,68 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     item: MenuItem,
     quantity = 1,
     variantId?: string,
-    extrasIds: string[] = [],
-    instructions?: string
+    extraIds?: string[],
+    specialInstructions?: string
   ) => {
-    if (!item.isAvailable) {
-      addToast(
-        'error',
-        language === 'bs' ? 'Artikal nedostupan' : 'Item unavailable',
-        language === 'bs' ? 'Ovo jelo trenutno nije na raspolaganju.' : 'This dish is currently out of stock.'
-      );
-      return;
-    }
-
     const selectedVariant = item.variants?.find((v) => v.id === variantId);
-    const selectedExtras = (item.extras || []).filter((e) => extrasIds.includes(e.id));
+    const selectedExtras: ItemExtra[] = (item.extras || []).filter((e) =>
+      extraIds?.includes(e.id)
+    );
 
-    // Calculate base unit price with variants and extras
-    const baseCents = Math.round(item.price * 100);
-    const variantCents = selectedVariant ? Math.round(selectedVariant.priceDelta * 100) : 0;
-    const extrasCents = selectedExtras.reduce((sum, e) => sum + Math.round(e.price * 100), 0);
-    const itemPrice = (baseCents + variantCents + extrasCents) / 100;
-
-    const cartItemId = `${item.id}_${variantId || 'base'}_${extrasIds.sort().join('-')}`;
+    const unitPrice = calculateItemUnitPrice(item.price, selectedVariant, selectedExtras);
+    const lineTotal = (Math.round(unitPrice * 100) * quantity) / 100;
+    const cartItemId = `${item.id}-${variantId || 'std'}-${(extraIds || []).sort().join('_')}`;
 
     setCart((prev) => {
-      const existingIndex = prev.findIndex((c) => c.cartItemId === cartItemId);
-      if (existingIndex > -1) {
-        const updated = [...prev];
-        const existing = updated[existingIndex];
+      const existing = prev.find((ci) => ci.cartItemId === cartItemId);
+      if (existing) {
         const newQty = existing.quantity + quantity;
-        updated[existingIndex] = {
-          ...existing,
-          quantity: newQty,
-          lineTotal: (Math.round(itemPrice * 100) * newQty) / 100,
-        };
-        return updated;
-      } else {
-        const newItem: CartItem = {
-          cartItemId,
-          menuItem: item,
-          quantity,
-          selectedVariant,
-          selectedExtras,
-          specialInstructions: instructions,
-          itemPrice,
-          lineTotal: (Math.round(itemPrice * 100) * quantity) / 100,
-        };
-        return [...prev, newItem];
+        const newLineTotal = (Math.round(unitPrice * 100) * newQty) / 100;
+        return prev.map((ci) =>
+          ci.cartItemId === cartItemId
+            ? { ...ci, quantity: newQty, lineTotal: newLineTotal }
+            : ci
+        );
       }
+
+      const newItem: CartItem = {
+        cartItemId,
+        menuItem: item,
+        quantity,
+        selectedVariant,
+        selectedExtras,
+        specialInstructions,
+        itemPrice: unitPrice,
+        lineTotal,
+      };
+      return [...prev, newItem];
     });
 
     addToast(
       'success',
       language === 'bs' ? 'Dodano u korpu' : 'Added to cart',
-      `${quantity}x ${language === 'bs' ? item.name : item.nameEn} (${itemPrice.toFixed(2)} KM)`
+      `${quantity}x ${language === 'bs' ? item.name : item.nameEn} (${item.price.toFixed(2)} KM)`
     );
   };
 
-  const updateCartQuantity = (cartItemId: string, delta: number) => {
-    setCart((prev) => {
-      return prev
-        .map((item) => {
-          if (item.cartItemId === cartItemId) {
-            const newQty = item.quantity + delta;
-            if (newQty <= 0) return null;
-            return {
-              ...item,
-              quantity: newQty,
-              lineTotal: (Math.round(item.itemPrice * 100) * newQty) / 100,
-            };
-          }
-          return item;
-        })
-        .filter((item): item is CartItem => item !== null);
-    });
+  const removeFromCart = (cartItemId: string) => {
+    setCart((prev) => prev.filter((ci) => ci.cartItemId !== cartItemId));
   };
 
-  const removeFromCart = (cartItemId: string) => {
-    setCart((prev) => prev.filter((item) => item.cartItemId !== cartItemId));
+  const updateCartQuantity = (cartItemId: string, delta: number) => {
+    setCart((prev) =>
+      prev
+        .map((ci) => {
+          if (ci.cartItemId === cartItemId) {
+            const newQty = ci.quantity + delta;
+            if (newQty <= 0) return null;
+            const newLineTotal = (Math.round(ci.itemPrice * 100) * newQty) / 100;
+            return { ...ci, quantity: newQty, lineTotal: newLineTotal };
+          }
+          return ci;
+        })
+        .filter((ci): ci is CartItem => ci !== null)
+    );
   };
 
   const clearCart = () => {
@@ -324,41 +294,68 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     setAppliedPromo(null);
   };
 
-  // Calculations
-  const cartSubtotal = calculateCartSubtotal(cart);
-  const deliveryFee = calculateDeliveryFee(cartSubtotal, settings, 'delivery');
-  const promoValidation = validateAndApplyDiscount(cartSubtotal, appliedPromo);
-  const discountAmount = promoValidation.isValid ? promoValidation.discountAmount : 0;
-  const cartTotal = calculateOrderTotal(cartSubtotal, deliveryFee, discountAmount);
-
+  // Promo code
   const applyPromoCode = (code: string) => {
-    const clean = code.trim().toUpperCase();
-    const promo = promotions.find((p) => p.code.toUpperCase() === clean);
+    const cleanCode = code.trim().toUpperCase();
+    const promo = promotions.find((p) => p.code.toUpperCase() === cleanCode);
+
     if (!promo) {
       return {
         success: false,
-        message: language === 'bs' ? 'Kupon kod nije pronađen' : 'Promotion code not found',
+        message: language === 'bs' ? 'Nevažeći promotivni kod.' : 'Invalid coupon code.',
       };
     }
-    const val = validateAndApplyDiscount(cartSubtotal, promo);
-    if (val.isValid) {
-      setAppliedPromo(promo);
-      return { success: true, message: val.message };
+
+    if (!promo.isActive) {
+      return {
+        success: false,
+        message: language === 'bs' ? 'Ovaj kod više nije aktivan.' : 'This coupon has expired.',
+      };
     }
-    return { success: false, message: val.message };
+
+    const currentSubtotal = calculateCartSubtotal(cart);
+    if (promo.minOrderAmount && currentSubtotal < promo.minOrderAmount) {
+      return {
+        success: false,
+        message:
+          language === 'bs'
+            ? `Minimalan iznos narudžbe za ovaj kod je ${promo.minOrderAmount.toFixed(2)} KM.`
+            : `Minimum order for this coupon is ${promo.minOrderAmount.toFixed(2)} KM.`,
+      };
+    }
+
+    setAppliedPromo(promo);
+    return {
+      success: true,
+      message:
+        language === 'bs'
+          ? `Kupon ${promo.code} uspješno primijenjen!`
+          : `Promo code ${promo.code} applied!`,
+    };
   };
 
   const removePromoCode = () => {
     setAppliedPromo(null);
   };
 
+  // Calculations
+  const cartSubtotal = calculateCartSubtotal(cart);
+  const deliveryFee = calculateDeliveryFee(cartSubtotal, settings, 'delivery');
+  const discountResult = validateAndApplyDiscount(cartSubtotal, appliedPromo);
+  const discountAmount = discountResult.discountAmount;
+  const cartTotal = calculateOrderTotal(cartSubtotal, deliveryFee, discountAmount);
+  const finalTotal = cartTotal;
+
   // Orders
-  const createOrder = async (orderData: Omit<Order, 'orderNumber' | 'status' | 'createdAt' | 'updatedAt'>): Promise<Order> => {
+  const submitOrder = async (
+    orderData: Omit<Order, 'id' | 'orderNumber' | 'status' | 'createdAt' | 'updatedAt'>
+  ): Promise<Order> => {
     const orderNumber = generateOrderNumber();
     const now = new Date().toISOString();
 
     const newOrder: Order = {
       ...orderData,
+      id: `ord-${Date.now()}`,
       orderNumber,
       status: 'new',
       createdAt: now,
@@ -369,13 +366,8 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     setOrders((prev) => [newOrder, ...prev]);
     clearCart();
 
-    // Persist to Firestore
-    try {
-      const orderDocRef = doc(db, 'orders', orderNumber);
-      await setDoc(orderDocRef, newOrder);
-    } catch (err) {
-      console.warn('Saved order locally (Firestore offline/background sync):', err);
-    }
+    // Persist to Firestore lazily
+    await saveOrderToFirestore(newOrder);
 
     addToast(
       'success',
@@ -386,32 +378,25 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     return newOrder;
   };
 
+  const createOrder = submitOrder;
+
   const updateOrderStatus = async (orderNumber: string, newStatus: OrderStatus, notes?: string) => {
     const now = new Date().toISOString();
     setOrders((prev) =>
       prev.map((ord) => {
         if (ord.orderNumber === orderNumber) {
-          return {
+          const updated = {
             ...ord,
             status: newStatus,
             internalNotes: notes !== undefined ? notes : ord.internalNotes,
             updatedAt: now,
           };
+          saveOrderToFirestore(updated);
+          return updated;
         }
         return ord;
       })
     );
-
-    try {
-      const orderDocRef = doc(db, 'orders', orderNumber);
-      await updateDoc(orderDocRef, {
-        status: newStatus,
-        ...(notes !== undefined ? { internalNotes: notes } : {}),
-        updatedAt: now,
-      });
-    } catch (e) {
-      console.warn('Status updated locally:', e);
-    }
   };
 
   const getOrder = (orderNumber: string) => {
@@ -427,6 +412,7 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
     const newReservation: Reservation = {
       ...resData,
+      id: `res-${Date.now()}`,
       reservationNumber,
       status: 'pending',
       createdAt: now,
@@ -435,12 +421,8 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
     setReservations((prev) => [newReservation, ...prev]);
 
-    try {
-      const resDocRef = doc(db, 'reservations', reservationNumber);
-      await setDoc(resDocRef, newReservation);
-    } catch (e) {
-      console.warn('Saved reservation locally:', e);
-    }
+    // Persist to Firestore lazily
+    await saveReservationToFirestore(newReservation);
 
     addToast(
       'success',
@@ -462,27 +444,18 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     setReservations((prev) =>
       prev.map((r) => {
         if (r.reservationNumber === reservationNumber) {
-          return {
+          const updated = {
             ...r,
             status,
             internalNotes: internalNotes !== undefined ? internalNotes : r.internalNotes,
             updatedAt: now,
           };
+          saveReservationToFirestore(updated);
+          return updated;
         }
         return r;
       })
     );
-
-    try {
-      const resDocRef = doc(db, 'reservations', reservationNumber);
-      await updateDoc(resDocRef, {
-        status,
-        ...(internalNotes !== undefined ? { internalNotes } : {}),
-        updatedAt: now,
-      });
-    } catch (e) {
-      console.warn('Reservation updated locally:', e);
-    }
   };
 
   // Event Inquiries
@@ -496,12 +469,7 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     };
     setEventInquiries((prev) => [newInquiry, ...prev]);
 
-    try {
-      const docRef = doc(db, 'eventInquiries', newInquiry.id!);
-      await setDoc(docRef, newInquiry);
-    } catch (e) {
-      console.warn('Saved inquiry locally:', e);
-    }
+    await saveEventInquiryToFirestore(newInquiry);
 
     addToast(
       'success',
@@ -515,18 +483,7 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     if (!email || !email.includes('@')) {
       return { success: false, message: language === 'bs' ? 'Molimo unesite ispravan email' : 'Please provide a valid email' };
     }
-    const cleanId = email.replace(/[^a-zA-Z0-9]/g, '_');
-    const now = new Date().toISOString();
-
-    try {
-      await setDoc(doc(db, 'newsletterSubscribers', cleanId), {
-        email,
-        subscribedAt: now,
-        consentGiven: true,
-      });
-    } catch {
-      // local log
-    }
+    await saveNewsletterSubscription(email);
 
     return {
       success: true,
@@ -537,11 +494,7 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   // Admin menu management
   const updateMenuItem = async (item: MenuItem) => {
     setMenuItems((prev) => prev.map((m) => (m.id === item.id ? item : m)));
-    try {
-      await setDoc(doc(db, 'menuItems', item.id), item);
-    } catch (e) {
-      console.warn('Item updated locally:', e);
-    }
+    await saveMenuItemToFirestore(item);
     addToast('success', 'Meni ažuriran', `Jelo "${item.name}" je uspješno spremljeno.`);
   };
 
@@ -549,16 +502,13 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     const id = `item-${Date.now()}`;
     const newItem: MenuItem = { ...itemData, id };
     setMenuItems((prev) => [...prev, newItem]);
-    try {
-      await setDoc(doc(db, 'menuItems', id), newItem);
-    } catch (e) {
-      console.warn('Item added locally:', e);
-    }
+    await saveMenuItemToFirestore(newItem);
     addToast('success', 'Novo jelo kreirano', `"${newItem.name}" je dodano na meni.`);
   };
 
   const deleteMenuItem = async (itemId: string) => {
     setMenuItems((prev) => prev.filter((m) => m.id !== itemId));
+    await deleteMenuItemFromFirestore(itemId);
     addToast('info', 'Jelo uklonjeno', 'Jelo je izbrisano sa menija.');
   };
 
@@ -573,11 +523,7 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const updateSettings = async (newSettings: Partial<RestaurantSettings>) => {
     const merged = { ...settings, ...newSettings };
     setSettings(merged);
-    try {
-      await setDoc(doc(db, 'restaurantSettings', 'global'), merged);
-    } catch (e) {
-      console.warn('Settings updated locally:', e);
-    }
+    await saveSettingsToFirestore(merged);
     addToast('success', 'Postavke sačuvane', 'Postavke restorana su uspješno ažurirane.');
   };
 
@@ -596,17 +542,20 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         toggleItemAvailability,
         cart,
         addToCart,
-        updateCartQuantity,
         removeFromCart,
+        updateCartQuantity,
         clearCart,
-        appliedPromo,
-        applyPromoCode,
-        removePromoCode,
         cartSubtotal,
         deliveryFee,
         discountAmount,
         cartTotal,
+        finalTotal,
+        promotions,
+        appliedPromo,
+        applyPromoCode,
+        removePromoCode,
         orders,
+        submitOrder,
         createOrder,
         updateOrderStatus,
         getOrder,
@@ -633,7 +582,9 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 };
 
 export const useRestaurant = () => {
-  const ctx = useContext(RestaurantContext);
-  if (!ctx) throw new Error('useRestaurant must be used within RestaurantProvider');
-  return ctx;
+  const context = useContext(RestaurantContext);
+  if (!context) {
+    throw new Error('useRestaurant must be used within a RestaurantProvider');
+  }
+  return context;
 };
