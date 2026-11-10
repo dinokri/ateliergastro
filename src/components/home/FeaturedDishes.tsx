@@ -22,7 +22,7 @@ export const FeaturedDishes: React.FC<FeaturedDishesProps> = ({ setCurrentTab })
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] font-semibold text-[#B66F52] mb-2">
+            <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] font-semibold text-[#96472C] mb-2">
               <Sparkles className="w-3.5 h-3.5" />
               <span>{language === 'bs' ? 'Autorski Specijaliteti' : 'Chef’s Recommendations'}</span>
             </div>
@@ -36,7 +36,7 @@ export const FeaturedDishes: React.FC<FeaturedDishesProps> = ({ setCurrentTab })
               setCurrentTab('menu');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm font-semibold text-[#59634A] hover:text-[#B66F52] transition-colors group"
+            className="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm font-semibold text-[#3F4734] hover:text-[#96472C] transition-colors group"
           >
             <span>{language === 'bs' ? 'Pogledaj kompletan meni (35+ jela)' : 'View entire menu'}</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -56,8 +56,11 @@ export const FeaturedDishes: React.FC<FeaturedDishesProps> = ({ setCurrentTab })
                   <img
                     src={item.imageUrl}
                     alt={language === 'bs' ? item.name : item.nameEn}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    width="400"
+                    height="240"
                     loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       // Fallback image if remote url fails
                       (e.target as HTMLImageElement).src =

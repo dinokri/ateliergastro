@@ -14,10 +14,16 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentTab }) => {
       {/* Editorial High-Resolution Background Imagery */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&auto=format&fit=crop&q=85"
+          src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80"
+          srcSet="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=640&auto=format&fit=crop&q=75 640w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1080&auto=format&fit=crop&q=80 1080w, https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&auto=format&fit=crop&q=85 1920w"
+          sizes="100vw"
+          width="1920"
+          height="1080"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
           alt="Atelier Bistro Restaurant Atmosphere and Fine Table Setting"
           className="w-full h-full object-cover object-center scale-105 animate-in fade-in zoom-in-95 duration-1000 opacity-35"
-          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#20221F] via-[#20221F]/60 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#20221F]/80 via-transparent to-[#20221F]/80" />

@@ -69,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, setCurrentTab, openQ
             <span className="font-serif text-2xl sm:text-3xl tracking-widest font-semibold text-[#20221F] group-hover:text-[#B66F52] transition-colors uppercase">
               {settings.name}
             </span>
-            <span className="text-[10px] tracking-[0.28em] text-[#59634A] font-medium uppercase -mt-1">
+            <span className="text-[10px] tracking-[0.28em] text-[#3F4734] font-medium uppercase -mt-1">
               Sarajevo &bull; Haute Cuisine
             </span>
           </button>
@@ -82,8 +82,8 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, setCurrentTab, openQ
                 onClick={() => handleNavClick(link.id)}
                 className={`px-3 py-2 rounded-lg text-xs xl:text-sm font-medium tracking-wide transition-all ${
                   currentTab === link.id
-                    ? 'text-[#B66F52] font-semibold bg-[#E9E1D4]/40'
-                    : 'text-[#20221F]/80 hover:text-[#20221F] hover:bg-[#E9E1D4]/20'
+                    ? 'text-[#96472C] font-semibold bg-[#E9E1D4]/60'
+                    : 'text-[#20221F]/85 hover:text-[#20221F] hover:bg-[#E9E1D4]/30'
                 }`}
               >
                 {language === 'bs' ? link.labelBs : link.labelEn}

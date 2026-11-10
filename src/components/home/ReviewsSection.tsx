@@ -10,8 +10,8 @@ export const ReviewsSection: React.FC = () => {
     <section className="py-20 bg-[#F7F4ED] text-[#20221F]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
-        <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] font-semibold text-[#B66F52] mb-3">
-          <Star className="w-3.5 h-3.5 fill-[#B66F52]" />
+        <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] font-semibold text-[#96472C] mb-3">
+          <Star className="w-3.5 h-3.5 fill-[#96472C]" />
           <span>{language === 'bs' ? 'Iskustva Gostiju' : 'Guest Impressions'}</span>
         </div>
 
@@ -19,7 +19,7 @@ export const ReviewsSection: React.FC = () => {
           {language === 'bs' ? 'Riječi Naših Posjetilaca' : 'Reflections from Our Tables'}
         </h2>
 
-        <p className="text-xs sm:text-sm text-[#20221F]/70 max-w-xl mx-auto mb-14 font-light">
+        <p className="text-xs sm:text-sm text-[#20221F]/80 max-w-xl mx-auto mb-14 font-light">
           {language === 'bs'
             ? 'Transparentne i provjerene recenzije gostiju koji su posjetili naš restoran u Sarajevu.'
             : 'Authentic feedback and impressions from patrons dining with us in Sarajevo.'}
@@ -46,11 +46,11 @@ export const ReviewsSection: React.FC = () => {
 
               <div className="pt-4 border-t border-[#E9E1D4]/60 flex items-center justify-between">
                 <div>
-                  <h4 className="font-semibold text-sm text-[#20221F]">{review.author}</h4>
-                  <p className="text-[11px] text-[#20221F]/50">{review.date}</p>
+                  <h3 className="font-semibold text-sm text-[#20221F]">{review.author}</h3>
+                  <p className="text-[11px] text-[#20221F]/70">{review.date}</p>
                 </div>
 
-                <div className="flex items-center gap-1 text-[11px] text-[#59634A] font-medium bg-[#59634A]/10 px-2 py-0.5 rounded-full">
+                <div className="flex items-center gap-1 text-[11px] text-[#3F4734] font-medium bg-[#59634A]/10 px-2.5 py-0.5 rounded-full">
                   <CheckCircle2 className="w-3 h-3 text-[#59634A]" />
                   <span>{review.source}</span>
                 </div>

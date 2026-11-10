@@ -21,8 +21,11 @@ export const AtmosphereSection: React.FC<AtmosphereSectionProps> = ({ setCurrent
               <img
                 src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=900&auto=format&fit=crop&q=80"
                 alt="Atelier Bistro Dining Room Atmosphere"
-                className="w-full h-96 object-cover object-center"
+                width="480"
+                height="384"
                 loading="lazy"
+                decoding="async"
+                className="w-full h-96 object-cover object-center"
               />
             </div>
 
@@ -31,8 +34,11 @@ export const AtmosphereSection: React.FC<AtmosphereSectionProps> = ({ setCurrent
               <img
                 src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&auto=format&fit=crop&q=80"
                 alt="Executive Chef Plating Modern Dish"
-                className="w-full h-44 object-cover"
+                width="256"
+                height="176"
                 loading="lazy"
+                decoding="async"
+                className="w-full h-44 object-cover"
               />
             </div>
 
@@ -40,13 +46,13 @@ export const AtmosphereSection: React.FC<AtmosphereSectionProps> = ({ setCurrent
             <div className="absolute -top-6 -left-6 z-20 bg-[#59634A] text-[#F7F4ED] p-5 rounded-2xl shadow-xl hidden sm:flex flex-col items-center justify-center text-center">
               <Award className="w-6 h-6 text-[#E9E1D4] mb-1" />
               <span className="font-serif text-lg font-bold">12+ Godina</span>
-              <span className="text-[10px] uppercase tracking-wider text-[#E9E1D4]/80">Kulinarske Tradicije</span>
+              <span className="text-[10px] uppercase tracking-wider text-[#E9E1D4]/90">Kulinarske Tradicije</span>
             </div>
           </div>
 
           {/* Editorial Narrative */}
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] font-semibold text-[#B66F52]">
+            <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] font-semibold text-[#96472C]">
               <Compass className="w-3.5 h-3.5" />
               <span>{language === 'bs' ? 'Naša Kulinarska Filozofija' : 'Our Gastronomic Philosophy'}</span>
             </div>
@@ -57,7 +63,7 @@ export const AtmosphereSection: React.FC<AtmosphereSectionProps> = ({ setCurrent
                 : 'Harmony of the Mediterranean and Modern World Cuisine'}
             </h2>
 
-            <p className="text-sm sm:text-base text-[#20221F]/80 font-light leading-relaxed">
+            <p className="text-sm sm:text-base text-[#20221F]/85 font-light leading-relaxed">
               {language === 'bs'
                 ? 'Atelier Bistro nastao je iz duboke strasti prema čistim okusima i beskompromisnom kvalitetu namirnica. Svaki tanjir je slikarsko platno na kojem naši šefovi spajaju tradicionalne recepte jadranske obale sa modernim kulinarskim tehnikama sous-vide, fermentacije i drvenog uglja.'
                 : 'Atelier Bistro was founded on an unrelenting reverence for unadulterated flavors and pristine provenance. Each plate is a culinary canvas where our chefs combine time-honored Adriatic coastal recipes with modern techniques of wood fire, sous-vide, and natural fermentation.'}
@@ -65,25 +71,25 @@ export const AtmosphereSection: React.FC<AtmosphereSectionProps> = ({ setCurrent
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div className="p-4 rounded-xl bg-white border border-[#E9E1D4] shadow-sm">
-                <div className="w-8 h-8 rounded-lg bg-[#59634A]/10 text-[#59634A] flex items-center justify-center mb-2">
+                <div className="w-8 h-8 rounded-lg bg-[#59634A]/10 text-[#3F4734] flex items-center justify-center mb-2">
                   <Wine className="w-4 h-4" />
                 </div>
-                <h4 className="font-serif text-base font-semibold text-[#20221F]">
+                <h3 className="font-serif text-base font-semibold text-[#20221F]">
                   {language === 'bs' ? 'Autorska Vinska Karta' : 'Curated Wine Cellar'}
-                </h4>
-                <p className="text-xs text-[#20221F]/70 mt-1">
+                </h3>
+                <p className="text-xs text-[#20221F]/75 mt-1">
                   {language === 'bs' ? 'Preko 120 odabranih organskih i grand cru etiketa.' : 'Over 120 organic and premier cru vintages.'}
                 </p>
               </div>
 
               <div className="p-4 rounded-xl bg-white border border-[#E9E1D4] shadow-sm">
-                <div className="w-8 h-8 rounded-lg bg-[#B66F52]/10 text-[#B66F52] flex items-center justify-center mb-2">
+                <div className="w-8 h-8 rounded-lg bg-[#96472C]/10 text-[#96472C] flex items-center justify-center mb-2">
                   <HeartHandshake className="w-4 h-4" />
                 </div>
-                <h4 className="font-serif text-base font-semibold text-[#20221F]">
+                <h3 className="font-serif text-base font-semibold text-[#20221F]">
                   {language === 'bs' ? 'Lokalni Proizvođači' : 'Local Artisans'}
-                </h4>
-                <p className="text-xs text-[#20221F]/70 mt-1">
+                </h3>
+                <p className="text-xs text-[#20221F]/75 mt-1">
                   {language === 'bs' ? 'Hercegovački sirevi, maslinova ulja i organsko povrće.' : 'Karst artisan cheeses, cold-pressed oils, wild herbs.'}
                 </p>
               </div>

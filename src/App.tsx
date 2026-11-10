@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { AuthProvider } from './context/AuthContext';
 import { RestaurantProvider, useRestaurant } from './context/RestaurantContext';
 import { Header } from './components/common/Header';
@@ -16,21 +16,52 @@ import { AtmosphereSection } from './components/home/AtmosphereSection';
 import { ReviewsSection } from './components/home/ReviewsSection';
 import { MapLocationSection } from './components/home/MapLocationSection';
 import { DigitalMenu } from './components/menu/DigitalMenu';
-import { DishDetailModal } from './components/menu/DishDetailModal';
 import { CartDrawer } from './components/cart/CartDrawer';
-import { CheckoutPage } from './components/checkout/CheckoutPage';
-import { OrderTrackingView } from './components/tracking/OrderTrackingView';
-import { ReservationPage } from './components/reservations/ReservationPage';
-import { AboutPage } from './components/about/AboutPage';
-import { GalleryPage } from './components/gallery/GalleryPage';
-import { PrivateDiningPage } from './components/events/PrivateDiningPage';
-import { ContactPage } from './components/contact/ContactPage';
-import { AdminDashboard } from './components/admin/AdminDashboard';
-import { QRMenuModal } from './components/qr/QRMenuModal';
-import { LegalModal } from './components/legal/LegalModal';
+
+// Code-split secondary routes and heavy modals to eliminate unused initial JavaScript
+const CheckoutPage = lazy(() =>
+  import('./components/checkout/CheckoutPage').then((m) => ({ default: m.CheckoutPage }))
+);
+const OrderTrackingView = lazy(() =>
+  import('./components/tracking/OrderTrackingView').then((m) => ({ default: m.OrderTrackingView }))
+);
+const ReservationPage = lazy(() =>
+  import('./components/reservations/ReservationPage').then((m) => ({ default: m.ReservationPage }))
+);
+const AboutPage = lazy(() =>
+  import('./components/about/AboutPage').then((m) => ({ default: m.AboutPage }))
+);
+const GalleryPage = lazy(() =>
+  import('./components/gallery/GalleryPage').then((m) => ({ default: m.GalleryPage }))
+);
+const PrivateDiningPage = lazy(() =>
+  import('./components/events/PrivateDiningPage').then((m) => ({ default: m.PrivateDiningPage }))
+);
+const ContactPage = lazy(() =>
+  import('./components/contact/ContactPage').then((m) => ({ default: m.ContactPage }))
+);
+const AdminDashboard = lazy(() =>
+  import('./components/admin/AdminDashboard').then((m) => ({ default: m.AdminDashboard }))
+);
+const DishDetailModal = lazy(() =>
+  import('./components/menu/DishDetailModal').then((m) => ({ default: m.DishDetailModal }))
+);
+const QRMenuModal = lazy(() =>
+  import('./components/qr/QRMenuModal').then((m) => ({ default: m.QRMenuModal }))
+);
+const LegalModal = lazy(() =>
+  import('./components/legal/LegalModal').then((m) => ({ default: m.LegalModal }))
+);
+
+const PageLoadingFallback: React.FC = () => (
+  <div className="min-h-[50vh] flex flex-col items-center justify-center p-8 text-center" aria-live="polite" aria-busy="true">
+    <div className="w-10 h-10 rounded-full border-3 border-[#59634A]/30 border-t-[#B66F52] animate-spin mb-3" />
+    <span className="text-xs uppercase tracking-widest text-[#20221F]/70 font-medium">Učitavanje...</span>
+  </div>
+);
 
 function MainApp() {
-  const { selectedDish, setSelectedDish, setIsCartOpen } = useRestaurant();
+  const { selectedDish, setSelectedDish } = useRestaurant();
   const [currentTab, setCurrentTab] = useState<string>('home');
   const [lastOrderNumber, setLastOrderNumber] = useState<string>('');
   const [isQRModalOpen, setIsQRModalOpen] = useState(false);
@@ -38,7 +69,7 @@ function MainApp() {
     'privacy' | 'cookies' | 'terms' | 'allergens' | 'delivery' | null
   >(null);
 
-  // Google Maps Platform Quota Banner State
+  // Google Maps Platform Quota Defense State
   const [quotaReached, setQuotaReached] = useState(false);
 
   useEffect(() => {
@@ -76,7 +107,7 @@ function MainApp() {
       
       {/* Google Maps Quota Defense Banner */}
       {quotaReached && (
-        <div className="bg-amber-50 border-b border-amber-200 text-amber-900 px-4 py-2.5 text-xs md:text-sm text-center sticky top-0 z-50 shadow-sm">
+        <div className="bg-amber-50 border-b border-amber-200 text-amber-900 px-4 py-2.5 text-xs md:text-sm text-center sticky top-0 z-50 shadow-sm" role="status">
           <span>
             Google Maps Platform quota reached. If you are the app owner, visit{' '}
             <a
@@ -99,7 +130,7 @@ function MainApp() {
         openQRModal={() => setIsQRModalOpen(true)}
       />
 
-      {/* Main Content Router */}
+      {/* Main Content Router with Suspense for Lazy Subpages */}
       <main className="flex-1">
         {currentTab === 'home' && (
           <div>
@@ -119,51 +150,62 @@ function MainApp() {
           </div>
         )}
 
-        {currentTab === 'checkout' && (
-          <CheckoutPage
-            onBackToMenu={() => setCurrentTab('menu')}
-            onOrderCompleted={handleOrderCompleted}
-          />
-        )}
+        <Suspense fallback={<PageLoadingFallback />}>
+          {currentTab === 'checkout' && (
+            <CheckoutPage
+              onBackToMenu={() => setCurrentTab('menu')}
+              onOrderCompleted={handleOrderCompleted}
+            />
+          )}
 
-        {currentTab === 'tracking' && (
-          <OrderTrackingView
-            initialOrderNumber={lastOrderNumber}
-            onBackToHome={() => setCurrentTab('home')}
-          />
-        )}
+          {currentTab === 'tracking' && (
+            <OrderTrackingView
+              initialOrderNumber={lastOrderNumber}
+              onBackToHome={() => setCurrentTab('home')}
+            />
+          )}
 
-        {currentTab === 'reservations' && <ReservationPage />}
+          {currentTab === 'reservations' && <ReservationPage />}
 
-        {currentTab === 'about' && <AboutPage setCurrentTab={setCurrentTab} />}
+          {currentTab === 'about' && <AboutPage setCurrentTab={setCurrentTab} />}
 
-        {currentTab === 'gallery' && <GalleryPage />}
+          {currentTab === 'gallery' && <GalleryPage />}
 
-        {currentTab === 'events' && <PrivateDiningPage />}
+          {currentTab === 'events' && <PrivateDiningPage />}
 
-        {currentTab === 'contact' && <ContactPage />}
+          {currentTab === 'contact' && <ContactPage />}
 
-        {currentTab === 'admin' && <AdminDashboard />}
+          {currentTab === 'admin' && <AdminDashboard />}
+        </Suspense>
       </main>
 
-      {/* Modals & Overlays */}
-      <DishDetailModal
-        dish={selectedDish}
-        onClose={() => setSelectedDish(null)}
-      />
+      {/* Modals & Overlays loaded on demand */}
+      <Suspense fallback={null}>
+        {selectedDish && (
+          <DishDetailModal
+            dish={selectedDish}
+            onClose={() => setSelectedDish(null)}
+          />
+        )}
 
+        {isQRModalOpen && (
+          <QRMenuModal
+            isOpen={isQRModalOpen}
+            onClose={() => setIsQRModalOpen(false)}
+          />
+        )}
+
+        {legalModalType && (
+          <LegalModal
+            type={legalModalType}
+            onClose={() => setLegalModalType(null)}
+          />
+        )}
+      </Suspense>
+
+      {/* Persistent Shopping Cart Drawer */}
       <CartDrawer
         onProceedToCheckout={() => setCurrentTab('checkout')}
-      />
-
-      <QRMenuModal
-        isOpen={isQRModalOpen}
-        onClose={() => setIsQRModalOpen(false)}
-      />
-
-      <LegalModal
-        type={legalModalType}
-        onClose={() => setLegalModalType(null)}
       />
 
       {/* Sticky Mobile Nav on Smartphones */}

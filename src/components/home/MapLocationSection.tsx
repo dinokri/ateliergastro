@@ -8,6 +8,20 @@ export const MapLocationSection: React.FC = () => {
   const { language, settings } = useRestaurant();
   const [mapError, setMapError] = useState(false);
 
+  // Gracefully catch Google Maps authorization errors without throwing unhandled exceptions
+  React.useEffect(() => {
+    const prevAuthFailure = (window as unknown as { gm_authFailure?: () => void }).gm_authFailure;
+    (window as unknown as { gm_authFailure?: () => void }).gm_authFailure = () => {
+      setMapError(true);
+      if (typeof prevAuthFailure === 'function') {
+        prevAuthFailure();
+      }
+    };
+    return () => {
+      (window as unknown as { gm_authFailure?: () => void }).gm_authFailure = prevAuthFailure;
+    };
+  }, []);
+
   // Use configured key or demo fallback
   const mapsApiKey = 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GOOGLE_MAPS_API_KEY) || 
@@ -23,8 +37,8 @@ export const MapLocationSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] font-semibold text-[#59634A] mb-2">
-            <MapPin className="w-3.5 h-3.5 text-[#B66F52]" />
+          <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] font-semibold text-[#3F4734] mb-2">
+            <MapPin className="w-3.5 h-3.5 text-[#96472C]" />
             <span>{language === 'bs' ? 'Lokacija & Pristup' : 'Location & Directions'}</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#20221F]">
@@ -54,19 +68,19 @@ export const MapLocationSection: React.FC = () => {
 
               <div className="space-y-3 text-xs sm:text-sm text-[#20221F]/80">
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-[#B66F52] shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-[#96472C] shrink-0 mt-0.5" />
                   <div>
                     <span className="font-semibold block text-[#20221F]">{settings.address}</span>
                     <span>{settings.postalCode} {settings.city}, {settings.country}</span>
-                    <span className="text-[11px] text-[#20221F]/50 block mt-0.5">
+                    <span className="text-[11px] text-[#20221F]/70 block mt-0.5">
                       GPS: {settings.lat.toFixed(4)}°N, {settings.lng.toFixed(4)}°E
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-[#59634A] shrink-0" />
-                  <a href={`tel:${settings.phone}`} className="hover:text-[#B66F52] font-semibold transition-colors">
+                  <Phone className="w-4 h-4 text-[#3F4734] shrink-0" />
+                  <a href={`tel:${settings.phone}`} className="hover:text-[#96472C] font-semibold transition-colors">
                     {settings.phone}
                   </a>
                 </div>

@@ -55,10 +55,10 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab, openLegalModal })
             <h3 className="font-serif text-2xl tracking-widest uppercase font-semibold text-[#F7F4ED]">
               {settings.name}
             </h3>
-            <p className="text-xs tracking-[0.2em] text-[#B66F52] uppercase font-medium">
+            <p className="text-xs tracking-[0.2em] text-[#D88667] uppercase font-medium">
               Sarajevo &bull; Haute Cuisine
             </p>
-            <p className="text-sm text-[#E9E1D4]/80 leading-relaxed font-light">
+            <p className="text-sm text-[#E9E1D4]/85 leading-relaxed font-light">
               {language === 'bs' ? settings.tagline : settings.taglineEn}
             </p>
             <div className="flex items-center space-x-3 pt-2">
@@ -85,10 +85,10 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab, openLegalModal })
 
           {/* Column 2: Hours & Hospitality */}
           <div className="space-y-4">
-            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#B66F52]">
+            <h3 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#D88667]">
               {language === 'bs' ? 'Radno Vrijeme' : 'Operating Hours'}
-            </h4>
-            <div className="space-y-2 text-xs text-[#E9E1D4]/80">
+            </h3>
+            <div className="space-y-2 text-xs text-[#E9E1D4]/85">
               <div className="flex justify-between py-1 border-b border-[#3F4734]/40">
                 <span>{language === 'bs' ? 'Pon - Čet:' : 'Mon - Thu:'}</span>
                 <span className="font-medium text-[#F7F4ED]">08:00 - 23:00</span>
@@ -102,7 +102,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab, openLegalModal })
                 <span className="font-medium text-[#F7F4ED]">10:00 - 22:00</span>
               </div>
             </div>
-            <p className="text-[11px] text-[#E9E1D4]/60 italic">
+            <p className="text-[11px] text-[#E9E1D4]/75 italic">
               {language === 'bs' 
                 ? '*Kuhinja prima narudžbe do 22:15h (nedjeljom do 21:15h).' 
                 : '*Kitchen accepts orders until 22:15h (Sundays until 21:15h).'}
@@ -111,33 +111,33 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab, openLegalModal })
 
           {/* Column 3: Location & Direct Contact */}
           <div className="space-y-4">
-            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#B66F52]">
+            <h3 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#D88667]">
               {language === 'bs' ? 'Lokacija & Kontakt' : 'Location & Inquiries'}
-            </h4>
-            <div className="space-y-3 text-xs text-[#E9E1D4]/80">
+            </h3>
+            <div className="space-y-3 text-xs text-[#E9E1D4]/85">
               <a 
                 href={`https://maps.google.com/?q=${encodeURIComponent(`${settings.address}, ${settings.city}`)}`}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-start gap-2.5 hover:text-[#B66F52] transition-colors group"
+                className="flex items-start gap-2.5 hover:text-[#D88667] transition-colors group"
               >
-                <MapPin className="w-4 h-4 text-[#59634A] shrink-0 mt-0.5 group-hover:text-[#B66F52]" />
+                <MapPin className="w-4 h-4 text-[#7A8B67] shrink-0 mt-0.5 group-hover:text-[#D88667]" />
                 <span>{settings.address}, {settings.city}, {settings.country}</span>
               </a>
 
               <a 
                 href={`tel:${settings.phone}`}
-                className="flex items-center gap-2.5 hover:text-[#B66F52] transition-colors"
+                className="flex items-center gap-2.5 hover:text-[#D88667] transition-colors"
               >
-                <Phone className="w-4 h-4 text-[#59634A] shrink-0" />
+                <Phone className="w-4 h-4 text-[#7A8B67] shrink-0" />
                 <span>{settings.phone}</span>
               </a>
 
               <a 
                 href={`mailto:${settings.email}`}
-                className="flex items-center gap-2.5 hover:text-[#B66F52] transition-colors"
+                className="flex items-center gap-2.5 hover:text-[#D88667] transition-colors"
               >
-                <Mail className="w-4 h-4 text-[#59634A] shrink-0" />
+                <Mail className="w-4 h-4 text-[#7A8B67] shrink-0" />
                 <span>{settings.email}</span>
               </a>
             </div>
@@ -147,7 +147,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab, openLegalModal })
                 setCurrentTab('contact');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="text-xs text-[#B66F52] hover:underline font-medium flex items-center gap-1 pt-1"
+              className="text-xs text-[#D88667] hover:underline font-medium flex items-center gap-1 pt-1"
             >
               <span>{language === 'bs' ? 'Pogledaj upute i mapu' : 'Get driving directions'}</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -156,10 +156,10 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab, openLegalModal })
 
           {/* Column 4: Newsletter Subscription */}
           <div className="space-y-4">
-            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#B66F52]">
+            <h3 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#D88667]">
               {language === 'bs' ? 'Gastronomski Bilten' : 'Culinary Gazette'}
-            </h4>
-            <p className="text-xs text-[#E9E1D4]/80 font-light leading-relaxed">
+            </h3>
+            <p className="text-xs text-[#E9E1D4]/85 font-light leading-relaxed">
               {language === 'bs'
                 ? 'Prijavite se za sezonske degustacijske menije, gostovanja vinara i pozivnice za privatne večeri.'
                 : 'Subscribe for seasonal tasting menu announcements, winemaker dinners, and exclusive reservations.'}
@@ -210,11 +210,11 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab, openLegalModal })
         </div>
 
         {/* Bottom Bar: Legal & Admin */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#E9E1D4]/60">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#E9E1D4]/80">
           <p>
             &copy; {new Date().getFullYear()} {settings.name}.{' '}
             {language === 'bs' ? 'Sva prava zadržana.' : 'All rights reserved.'}{' '}
-            <span className="text-[#E9E1D4]/40">| Demo Platform</span>
+            <span className="text-[#E9E1D4]/60">| Demo Platform</span>
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 text-[11px]">
@@ -258,7 +258,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab, openLegalModal })
                 setCurrentTab('admin');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="flex items-center gap-1 text-[#B66F52] hover:text-[#F7F4ED] transition-colors font-medium"
+              className="flex items-center gap-1 text-[#D88667] hover:text-[#F7F4ED] transition-colors font-medium"
             >
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Admin Portal</span>
