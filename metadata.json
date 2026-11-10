@@ -1,0 +1,6 @@
+{
+  "name": "Atelier Bistro - Fine Dining & Modern Mediterranean Gastronomy",
+  "description": "Atelier Bistro contemporary international and Mediterranean cuisine in Sarajevo. Online food ordering, table reservations, chef specials, and digital management platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

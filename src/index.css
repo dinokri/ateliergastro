@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --color-ivory: #F7F4ED;
+  --color-charcoal: #20221F;
+  --color-olive: #59634A;
+  --color-olive-dark: #3F4734;
+  --color-terracotta: #B66F52;
+  --color-terracotta-dark: #96533A;
+  --color-beige: #E9E1D4;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: #F7F4ED;
+    color: #20221F;
+  }
+  
+  h1, h2, h3, h4, .font-serif-title {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Custom scrollbar styling for elegance */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F4ED;
+}
+::-webkit-scrollbar-thumb {
+  background: #D9CEBE;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B66F52;
+}
+
+/* Print styles for receipts and QR codes */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .printable-area, .printable-area * {
+    visibility: visible;
+  }
+  .printable-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}

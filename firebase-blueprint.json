@@ -1,0 +1,239 @@
+{
+  "entities": {
+    "RestaurantSettings": {
+      "title": "RestaurantSettings",
+      "description": "Global restaurant profile, contact details, opening hours, and business policies.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "tagline": { "type": "string", "maxLength": 200 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "address": { "type": "string", "maxLength": 300 },
+        "city": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 50 },
+        "email": { "type": "string", "maxLength": 100 },
+        "currency": { "type": "string", "maxLength": 10 },
+        "timezone": { "type": "string", "maxLength": 50 },
+        "lat": { "type": "number" },
+        "lng": { "type": "number" },
+        "isDeliveryEnabled": { "type": "boolean" },
+        "isPickupEnabled": { "type": "boolean" },
+        "isTableOrderingEnabled": { "type": "boolean" },
+        "minOrderAmount": { "type": "number" },
+        "standardDeliveryFee": { "type": "number" },
+        "freeDeliveryThreshold": { "type": "number" },
+        "estimatedDeliveryTime": { "type": "string", "maxLength": 50 },
+        "estimatedPickupTime": { "type": "string", "maxLength": 50 },
+        "maxTableCapacity": { "type": "number" },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["name", "address", "phone", "currency"]
+    },
+    "MenuCategory": {
+      "title": "MenuCategory",
+      "description": "Category for organizing dishes and drinks.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "name": { "type": "string", "maxLength": 100 },
+        "nameEn": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 300 },
+        "descriptionEn": { "type": "string", "maxLength": 300 },
+        "type": { "type": "string", "enum": ["food", "drinks"] },
+        "imageUrl": { "type": "string", "maxLength": 500 },
+        "displayOrder": { "type": "number" },
+        "isVisible": { "type": "boolean" }
+      },
+      "required": ["name", "type", "displayOrder", "isVisible"]
+    },
+    "MenuItem": {
+      "title": "MenuItem",
+      "description": "Individual food or beverage offering with pricing, allergens, and dietary attributes.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "categoryId": { "type": "string", "maxLength": 64 },
+        "name": { "type": "string", "maxLength": 120 },
+        "nameEn": { "type": "string", "maxLength": 120 },
+        "shortDescription": { "type": "string", "maxLength": 250 },
+        "shortDescriptionEn": { "type": "string", "maxLength": 250 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "descriptionEn": { "type": "string", "maxLength": 1000 },
+        "ingredients": { "type": "string", "maxLength": 500 },
+        "ingredientsEn": { "type": "string", "maxLength": 500 },
+        "price": { "type": "number" },
+        "prepTimeMinutes": { "type": "number" },
+        "calories": { "type": "number" },
+        "isAvailable": { "type": "boolean" },
+        "isBestseller": { "type": "boolean" },
+        "isChefRecommendation": { "type": "boolean" },
+        "isNew": { "type": "boolean" },
+        "imageUrl": { "type": "string", "maxLength": 500 },
+        "dietaryTags": { "type": "array" },
+        "allergens": { "type": "array" },
+        "variants": { "type": "array" },
+        "extras": { "type": "array" }
+      },
+      "required": ["categoryId", "name", "price", "isAvailable"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer food order for delivery, pickup, or dine-in.",
+      "type": "object",
+      "properties": {
+        "orderNumber": { "type": "string", "maxLength": 64 },
+        "orderType": { "type": "string", "enum": ["delivery", "pickup", "dine_in"] },
+        "status": {
+          "type": "string",
+          "enum": [
+            "new",
+            "pending",
+            "confirmed",
+            "preparing",
+            "ready",
+            "out_for_delivery",
+            "delivered",
+            "completed",
+            "cancelled"
+          ]
+        },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "customerPhone": { "type": "string", "maxLength": 50 },
+        "customerEmail": { "type": "string", "maxLength": 100 },
+        "deliveryAddress": { "type": "object" },
+        "pickupTime": { "type": "string", "maxLength": 50 },
+        "tableId": { "type": "string", "maxLength": 50 },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "deliveryFee": { "type": "number" },
+        "discount": { "type": "number" },
+        "promoCode": { "type": "string", "maxLength": 30 },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string", "maxLength": 50 },
+        "specialInstructions": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "maxLength": 50 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["orderNumber", "orderType", "status", "customerName", "customerPhone", "items", "total", "createdAt"]
+    },
+    "Reservation": {
+      "title": "Reservation",
+      "description": "Table reservation request and status tracking.",
+      "type": "object",
+      "properties": {
+        "reservationNumber": { "type": "string", "maxLength": 64 },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "customerPhone": { "type": "string", "maxLength": 50 },
+        "customerEmail": { "type": "string", "maxLength": 100 },
+        "date": { "type": "string", "maxLength": 20 },
+        "time": { "type": "string", "maxLength": 20 },
+        "guests": { "type": "number" },
+        "seatingArea": { "type": "string", "maxLength": 50 },
+        "occasion": { "type": "string", "maxLength": 50 },
+        "specialRequests": { "type": "string", "maxLength": 500 },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "confirmed", "rejected", "cancelled", "completed", "no_show"]
+        },
+        "internalNotes": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "maxLength": 50 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["reservationNumber", "customerName", "customerPhone", "customerEmail", "date", "time", "guests", "status", "createdAt"]
+    },
+    "EventInquiry": {
+      "title": "EventInquiry",
+      "description": "Inquiry for private dining, group events, or catering.",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 50 },
+        "eventType": { "type": "string", "maxLength": 60 },
+        "preferredDate": { "type": "string", "maxLength": 20 },
+        "guestsCount": { "type": "number" },
+        "additionalRequests": { "type": "string", "maxLength": 1000 },
+        "status": { "type": "string", "enum": ["new", "in_progress", "confirmed", "archived"] },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["fullName", "email", "phone", "eventType", "guestsCount", "createdAt"]
+    },
+    "Promotion": {
+      "title": "Promotion",
+      "description": "Coupon codes and marketing discount promotions.",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string", "maxLength": 30 },
+        "discountType": { "type": "string", "enum": ["percentage", "fixed"] },
+        "discountValue": { "type": "number" },
+        "minOrderAmount": { "type": "number" },
+        "validFrom": { "type": "string", "maxLength": 30 },
+        "validUntil": { "type": "string", "maxLength": 30 },
+        "isActive": { "type": "boolean" },
+        "usageLimit": { "type": "number" },
+        "usageCount": { "type": "number" }
+      },
+      "required": ["code", "discountType", "discountValue", "isActive"]
+    },
+    "NewsletterSubscriber": {
+      "title": "NewsletterSubscriber",
+      "description": "Subscribed guest email for seasonal menu launches and private dining invites.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 100 },
+        "subscribedAt": { "type": "string", "maxLength": 50 },
+        "consentGiven": { "type": "boolean" }
+      },
+      "required": ["email", "subscribedAt", "consentGiven"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized staff or manager account with role-based access control.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "enum": ["admin", "manager", "staff", "kitchen"] },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/restaurantSettings/{settingsId}": {
+      "schema": "RestaurantSettings",
+      "description": "Restaurant profile, opening hours, and configuration."
+    },
+    "/menuCategories/{categoryId}": {
+      "schema": "MenuCategory",
+      "description": "Categories for food and beverage items."
+    },
+    "/menuItems/{itemId}": {
+      "schema": "MenuItem",
+      "description": "Food and beverage menu offerings."
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Online customer food orders."
+    },
+    "/reservations/{reservationId}": {
+      "schema": "Reservation",
+      "description": "Table reservation bookings."
+    },
+    "/eventInquiries/{inquiryId}": {
+      "schema": "EventInquiry",
+      "description": "Private event and catering inquiries."
+    },
+    "/promotions/{promoId}": {
+      "schema": "Promotion",
+      "description": "Promotional coupon codes."
+    },
+    "/newsletterSubscribers/{subId}": {
+      "schema": "NewsletterSubscriber",
+      "description": "Newsletter subscribers with verified consent."
+    },
+    "/admins/{uid}": {
+      "schema": "AdminUser",
+      "description": "Authorized administrators."
+    }
+  }
+}

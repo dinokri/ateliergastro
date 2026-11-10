@@ -1,0 +1,1826 @@
+PROJECT: PREMIUM RESTAURANT WEBSITE & DIGITAL MANAGEMENT PLATFORM
+
+Complete Full-Stack Restaurant Website, Online Ordering, Reservations, Digital Menu and Admin Dashboard
+
+1. YOUR ROLE AND OBJECTIVE
+
+Act as a senior full-stack software engineer, award-winning UI/UX designer, restaurant technology consultant, conversion optimization specialist, database architect, cybersecurity engineer and digital marketing strategist.
+
+Your task is to DESIGN, DEVELOP, IMPLEMENT AND TEST a complete, professional, production-oriented restaurant website and digital restaurant management platform.
+
+This is NOT a static landing page, a visual mockup, a template with non-functional buttons, or a simple restaurant presentation website.
+
+Build a complete, responsive, interactive, database-connected application.
+
+The platform must enable restaurant guests to:
+
+Discover the restaurant.
+
+Browse a professional digital food and drinks menu.
+
+View food photography, ingredients, prices and allergens.
+
+Make table reservations.
+
+Place online food orders.
+
+Choose delivery or pickup.
+
+Make payments through supported configured payment methods.
+
+Track their orders.
+
+Find the restaurant through Google Maps.
+
+Contact the restaurant.
+
+Explore events, promotions and special offers.
+
+Restaurant administrators must be able to manage the entire operation through a secure administration dashboard without editing source code.
+
+The final result must look and feel like a premium international restaurant brand, with the usability of a modern ordering platform.
+
+2. BRAND IDENTITY AND DESIGN DIRECTION
+
+Create a fictional but fully customizable demonstration restaurant brand.
+
+Use the name:
+
+ATELIER BISTRO
+
+Tagline:
+"An unforgettable experience, served with passion."
+
+Cuisine:
+Contemporary international cuisine with Mediterranean influences.
+
+The restaurant name, logo, tagline, cuisine, photographs, restaurant description, address, contact information, menu and all brand settings must be editable through the administration system.
+
+Do not represent fictional details as real business information. Clearly identify demonstration data that must be replaced before launch.
+
+Visual direction
+
+Use a premium contemporary restaurant aesthetic.
+
+Primary palette:
+
+Warm ivory: #F7F4ED
+
+Deep charcoal: #20221F
+
+Olive green: #59634A
+
+Muted terracotta: #B66F52
+
+Soft beige: #E9E1D4
+
+White: #FFFFFF
+
+Typography:
+
+Elegant editorial serif typography for headings.
+
+Modern sans-serif typography for body content.
+
+Clear hierarchy, generous spacing and readable text.
+
+Design requirements:
+
+Premium photography.
+
+Large editorial food imagery.
+
+Consistent spacing system.
+
+Refined card layouts.
+
+Subtle shadows and borders.
+
+Smooth micro-interactions.
+
+Tasteful hover animations.
+
+Carefully designed icons.
+
+Clear navigation.
+
+Consistent buttons and input fields.
+
+Excellent visual hierarchy.
+
+Avoid:
+
+Generic restaurant template appearance.
+
+Excessive gradients.
+
+Excessive rounded cards.
+
+Unnecessary animations.
+
+Excessively small fonts.
+
+Cluttered layouts.
+
+Giant empty areas.
+
+Unnecessary popups.
+
+Artificial-looking food photographs.
+
+Use real-looking, high-quality food and restaurant photography. Ensure every image loads correctly. Optimize and provide fallbacks for missing images. Never leave broken image icons or empty image placeholders in the finished application.
+
+The website should look like a professionally designed restaurant brand, not an AI-generated generic template.
+
+3. RESPONSIVE DESIGN
+
+Develop the complete experience for:
+
+Desktop computers and large monitors.
+
+Standard laptops.
+
+Tablets.
+
+Smartphones.
+
+Use a mobile-first responsive approach.
+
+Test at minimum:
+
+360px
+
+390px
+
+430px
+
+768px
+
+1024px
+
+1280px
+
+1440px
+
+1920px
+
+Mobile requirements:
+
+Compact navigation menu.
+
+Easy thumb-accessible buttons.
+
+Sticky bottom navigation with Menu, Order and Reserve actions.
+
+Optimized food cards.
+
+Responsive images.
+
+Mobile-friendly checkout.
+
+Mobile-friendly reservation forms.
+
+No horizontal scrolling.
+
+No overlapping components.
+
+No text overflow.
+
+No hidden essential functionality.
+
+Tablet requirements:
+
+Properly adjusted navigation.
+
+Two-column content where appropriate.
+
+Comfortable touch targets.
+
+Properly resized menu and ordering layouts.
+
+Desktop requirements:
+
+Large editorial hero section.
+
+Balanced content width.
+
+High-quality visual compositions.
+
+Proper use of whitespace.
+
+Convenient access to booking and ordering.
+
+The same functional features must work on every device.
+
+4. WEBSITE ARCHITECTURE AND PAGES
+
+Create the following pages and make all navigation links functional.
+
+A. HOME PAGE
+
+The homepage is the primary conversion page.
+
+Header:
+
+Restaurant logo.
+
+Home.
+
+Menu.
+
+Order Online.
+
+Reservations.
+
+About.
+
+Gallery.
+
+Contact.
+
+Language selector.
+
+Shopping cart icon.
+
+Prominent Reserve a Table button.
+
+Prominent Order Online action.
+
+Hero section:
+
+Large premium restaurant or signature dish photograph.
+
+Restaurant name.
+
+Tagline.
+
+Short description.
+
+Primary CTA: Reserve a Table.
+
+Secondary CTA: Explore Menu.
+
+Optional Order Online CTA.
+
+Below the hero, include:
+
+Restaurant introduction.
+
+Featured dishes.
+
+Popular menu categories.
+
+Bestsellers.
+
+Signature chef recommendations.
+
+Restaurant experience and atmosphere.
+
+Food photography section.
+
+Guest reviews from verified and authorized sources only.
+
+Special offers and seasonal promotions.
+
+Private events and group dining.
+
+Opening hours.
+
+Restaurant location.
+
+Google Maps section.
+
+Contact information.
+
+Newsletter subscription.
+
+Complete footer.
+
+Use clear calls to action throughout the page.
+
+The website must immediately communicate:
+
+What the restaurant serves.
+
+What makes it distinctive.
+
+Where it is located.
+
+When it is open.
+
+How guests can order or reserve a table.
+
+B. DIGITAL MENU
+
+Create a dedicated, fully functional digital menu page.
+
+The menu must be a real HTML-based menu, not a PDF document.
+
+Create the following demonstration categories:
+
+FOOD:
+
+Breakfast.
+
+Starters.
+
+Soups.
+
+Salads.
+
+Main Courses.
+
+Meat Dishes.
+
+Fish and Seafood.
+
+Pasta and Risotto.
+
+Pizza.
+
+Burgers and Sandwiches.
+
+Vegetarian.
+
+Vegan.
+
+Side Dishes.
+
+Desserts.
+
+DRINKS:
+
+Water and Soft Drinks.
+
+Fresh Juices.
+
+Coffee.
+
+Tea.
+
+Cocktails.
+
+Wine.
+
+Beer.
+
+Each category must have:
+
+Category name.
+
+Description.
+
+Category image.
+
+Display order.
+
+Visibility status.
+
+Each menu item must have:
+
+Food name.
+
+High-quality image.
+
+Short description.
+
+Full description.
+
+Ingredients.
+
+Price in BAM (KM).
+
+Category.
+
+Optional subcategory.
+
+Preparation time.
+
+Dietary information.
+
+Allergen information.
+
+Optional calories.
+
+Bestseller label.
+
+Chef recommendation label.
+
+New item label.
+
+Availability status.
+
+Optional size variants.
+
+Optional customization options.
+
+Additional toppings and extras.
+
+Dietary filters:
+
+Vegetarian.
+
+Vegan.
+
+Gluten-free.
+
+Dairy-free.
+
+Spicy.
+
+Nut-free.
+
+Allergens must be clearly identifiable.
+
+Never automatically classify a dish as allergen-free without verified restaurant information. Include a note advising guests with serious allergies to contact the restaurant.
+
+Menu functionality:
+
+Category navigation.
+
+Search.
+
+Filters.
+
+Sorting.
+
+Featured dishes.
+
+Dish detail modal.
+
+Responsive grid.
+
+Add to cart.
+
+Availability indicators.
+
+Out-of-stock handling.
+
+Administrators must be able to create, edit, delete, reorder, hide and temporarily disable menu items.
+
+When an administrator changes a price or availability status, the public menu must update from the database.
+
+C. ONLINE ORDERING SYSTEM
+
+Build a complete online ordering system.
+
+This is one of the most important features.
+
+Ordering options
+
+Allow customers to select:
+
+Home delivery.
+
+Pickup / takeaway.
+
+Dine-in ordering through a table QR code, where enabled.
+
+Shopping cart
+
+Implement a functional shopping cart with:
+
+Add and remove products.
+
+Increase and decrease quantities.
+
+Product variants.
+
+Extra ingredients.
+
+Customization options.
+
+Special preparation instructions.
+
+Item-level prices.
+
+Subtotal.
+
+Delivery fee.
+
+Discount.
+
+Final total.
+
+The cart must automatically recalculate whenever an item or quantity changes.
+
+Persist the cart between page navigation and refreshes where appropriate.
+
+Checkout
+
+Create a professional, easy-to-use checkout process.
+
+Collect:
+
+Customer details:
+
+Full name.
+
+Phone number.
+
+Email address.
+
+For delivery:
+
+City.
+
+Street.
+
+Building number.
+
+Apartment / floor, when applicable.
+
+Delivery instructions.
+
+Delivery zone.
+
+For pickup:
+
+Preferred pickup time.
+
+Customer details.
+
+For dine-in:
+
+Table identifier obtained through the QR code.
+
+Additional fields:
+
+Special instructions.
+
+Optional promotional code.
+
+Order confirmation consent.
+
+Delivery logic
+
+Administrators must be able to configure:
+
+Delivery zones.
+
+Delivery fees.
+
+Minimum order amounts.
+
+Estimated delivery times.
+
+Maximum delivery distance or supported areas.
+
+Temporary delivery unavailability.
+
+Free delivery thresholds.
+
+Calculate delivery fees automatically according to the configured rules.
+
+Do not accept orders outside enabled delivery areas.
+
+Order confirmation
+
+After checkout:
+
+Generate a unique order number.
+
+Save the complete order in the database.
+
+Display an order confirmation page.
+
+Show the order summary.
+
+Show the selected delivery or pickup method.
+
+Display the estimated preparation time where configured.
+
+Notify the restaurant administration.
+
+Provide an order tracking page using the order number and an appropriate verification method.
+
+Possible statuses:
+
+New Order.
+
+Pending Confirmation.
+
+Confirmed.
+
+Preparing.
+
+Ready for Pickup.
+
+Out for Delivery.
+
+Delivered.
+
+Completed.
+
+Cancelled.
+
+Update order statuses in the administration panel.
+
+Where supported, reflect status updates on the customer tracking page.
+
+Prevent duplicate submissions and accidental duplicate orders.
+
+Calculate all prices on the server using trusted menu data. Never trust totals submitted directly by the browser.
+
+5. TABLE RESERVATION SYSTEM
+
+Implement a functional restaurant reservation system.
+
+Guests must be able to select:
+
+Date.
+
+Time.
+
+Number of guests.
+
+Preferred seating area.
+
+Indoor or outdoor seating, where available.
+
+Special occasion.
+
+Additional requests.
+
+Customer information:
+
+Full name.
+
+Phone number.
+
+Email.
+
+Optional message.
+
+Availability logic
+
+The system must consider:
+
+Restaurant opening hours.
+
+Closed days.
+
+Special opening hours.
+
+Existing confirmed reservations.
+
+Pending reservations.
+
+Table capacity.
+
+Maximum party size.
+
+Reservation duration.
+
+Booking interval.
+
+Special blocked dates.
+
+Only show valid and available time slots.
+
+Do not allow overlapping bookings that exceed the restaurant's configured capacity.
+
+Use server-side validation and transactional booking checks to prevent two simultaneous users from successfully reserving unavailable capacity.
+
+Reservation statuses
+
+Pending.
+
+Confirmed.
+
+Rejected.
+
+Cancelled.
+
+Completed.
+
+No-show.
+
+The administrator must be able to:
+
+Confirm reservations.
+
+Reject reservations.
+
+Cancel reservations.
+
+Edit reservation details.
+
+Add internal notes.
+
+View reservations by date.
+
+Filter by status.
+
+View a calendar.
+
+Search by customer name or phone number.
+
+Customer notifications
+
+Send an acknowledgement when a booking is submitted.
+
+Send a confirmation only after the restaurant has actually confirmed it, or when an automatic booking rule has successfully confirmed it.
+
+Support configurable email notifications and an optional SMS or WhatsApp integration.
+
+If credentials are missing, clearly indicate that the notification integration still requires configuration. Do not simulate actual message delivery.
+
+6. GOOGLE MAPS INTEGRATION
+
+Integrate Google Maps Platform.
+
+Use the Google Maps integration available in Google AI Studio Build Mode when available.
+
+Create a professional map section with:
+
+Interactive Google Map.
+
+Restaurant location marker.
+
+Restaurant name.
+
+Address.
+
+Directions button.
+
+Open in Google Maps button.
+
+Contact details.
+
+Opening hours.
+
+Optional multiple locations.
+
+Use real configurable restaurant coordinates and address information.
+
+Provide an easy way to update the coordinates and map location through administration.
+
+If the full Maps integration is unavailable, create a working fallback using Google Maps Embed or a Google Maps directions link, and document the configuration required.
+
+Never invent a real restaurant location.
+
+7. ABOUT PAGE
+
+Create a visually engaging About page featuring:
+
+Restaurant story.
+
+Philosophy.
+
+Culinary concept.
+
+Ingredient quality.
+
+Chef introduction.
+
+Restaurant team.
+
+Atmosphere.
+
+Interior photography.
+
+Commitment to guest experience.
+
+Use editorial layouts and photography.
+
+All text and photos must be editable through the administrator dashboard.
+
+8. GALLERY
+
+Create a full responsive gallery.
+
+Sections:
+
+Food.
+
+Restaurant Interior.
+
+Drinks.
+
+Kitchen.
+
+Events.
+
+Team.
+
+Features:
+
+Image grid.
+
+Full-screen lightbox.
+
+Image navigation.
+
+Responsive layout.
+
+Optimized loading.
+
+Alt text.
+
+Administrators must be able to upload, replace, reorder and delete gallery photographs.
+
+9. CONTACT AND LOCATION PAGE
+
+Include:
+
+Complete restaurant address.
+
+Telephone number.
+
+Email address.
+
+Google Maps.
+
+Directions.
+
+Opening hours.
+
+Social media links.
+
+Contact form.
+
+WhatsApp contact action, when configured.
+
+The phone number must support click-to-call on mobile.
+
+The email must support click-to-email.
+
+The address must open navigation.
+
+Contact forms must have validation, spam protection, proper submission states and backend persistence or configured email delivery.
+
+10. EVENTS, PRIVATE DINING AND CATERING
+
+Create an optional business section for:
+
+Birthday celebrations.
+
+Corporate events.
+
+Private dining.
+
+Weddings and special occasions.
+
+Group reservations.
+
+Catering.
+
+Include:
+
+Photography.
+
+Service descriptions.
+
+Capacity information, editable by the administrator.
+
+Event inquiry form.
+
+Number of guests.
+
+Preferred date.
+
+Contact information.
+
+Additional requirements.
+
+Event inquiries must be saved in the database and appear in the admin dashboard.
+
+11. PROMOTIONS AND MARKETING
+
+Build a configurable marketing system.
+
+Features:
+
+Promotional banners.
+
+Discount codes.
+
+Limited-time offers.
+
+Featured dishes.
+
+Seasonal menus.
+
+Newsletter subscriptions.
+
+Announcement bar.
+
+Gift card presentation, where enabled.
+
+Coupon configuration:
+
+Percentage discount.
+
+Fixed discount.
+
+Start and expiration dates.
+
+Minimum order value.
+
+Maximum usage.
+
+Eligible products or categories.
+
+Active/inactive status.
+
+Validate promotions on the server.
+
+Newsletter subscribers must be stored securely, and marketing subscriptions must use explicit consent.
+
+Do not fabricate reviews, awards, testimonials or customer numbers.
+
+12. QR CODE MENU AND TABLE ORDERING
+
+Create a QR-based menu system.
+
+Each restaurant table can have a unique identifier.
+
+When a customer scans a table QR code:
+
+Open the digital menu.
+
+Identify the table.
+
+Allow the customer to browse food and drinks.
+
+Allow ordering if enabled.
+
+Attach the order to the correct table.
+
+Send the order to the restaurant dashboard.
+
+Administrators must be able to create and download QR codes for tables.
+
+Allow QR codes to be printed individually.
+
+Do not allow customers to alter table identity manually through untrusted client-side parameters.
+
+13. MULTILINGUAL SUPPORT
+
+Primary language:
+Bosnian, Latin script, ijekavian standard.
+
+Secondary language:
+English.
+
+Prepare the architecture for additional languages.
+
+Implement:
+
+Language selector.
+
+Translated navigation.
+
+Translated forms.
+
+Translated menu content.
+
+Translated validation messages.
+
+Translated checkout.
+
+Translated reservation pages.
+
+SEO language metadata.
+
+Do not translate only the navigation while leaving the rest of the interface untranslated.
+
+Store language-specific content in a consistent structure.
+
+14. PAYMENT SYSTEM
+
+Create a modular payment architecture.
+
+Available payment methods should be configurable:
+
+Cash on delivery.
+
+Cash on pickup.
+
+Payment at the restaurant.
+
+Online card payment, when a supported payment gateway is configured.
+
+Card payment through an eligible delivery/POS integration, when available.
+
+For a restaurant operating in Bosnia and Herzegovina, prepare an optional Monri payment gateway integration.
+
+Use the official integration documentation and merchant credentials.
+
+Requirements:
+
+Secure server-side payment session creation.
+
+Test/sandbox mode where available.
+
+Payment status handling.
+
+Secure webhook validation.
+
+Transaction references.
+
+Order/payment status synchronization.
+
+Error handling.
+
+Cancellation handling.
+
+Refund workflow where supported.
+
+Never store raw credit card information.
+
+Never expose merchant secrets or private API credentials in frontend code.
+
+Do not pretend to process online payments when the merchant has not configured and activated a payment provider.
+
+Keep cash and restaurant-payment options fully operational even before online card payments are activated.
+
+15. ADMINISTRATION DASHBOARD
+
+Create a separate protected /admin area.
+
+This dashboard must be a professional business management interface.
+
+It must be optimized for desktop, tablet and mobile.
+
+Admin authentication
+
+Secure administrator login.
+
+Firebase Authentication.
+
+Protected routes.
+
+Role-based permissions.
+
+Secure logout.
+
+Session handling.
+
+Password recovery.
+
+No default hardcoded admin password.
+
+Admin authorization must be enforced on the server and database security rules, not merely by hiding frontend components.
+
+Use a secure first-administrator setup method based on an authorized email or role configuration.
+
+Dashboard overview
+
+Show:
+
+Today's orders.
+
+Pending orders.
+
+Completed orders.
+
+Total sales for the selected period.
+
+Pending reservations.
+
+Confirmed reservations.
+
+Most popular menu items.
+
+Recent activity.
+
+Order trends.
+
+Use real database information.
+
+Menu management
+
+Full CRUD functionality:
+
+Create categories.
+
+Edit categories.
+
+Delete categories.
+
+Reorder categories.
+
+Create dishes.
+
+Upload photographs.
+
+Edit prices.
+
+Change descriptions.
+
+Set availability.
+
+Manage extras.
+
+Manage allergens.
+
+Mark bestsellers.
+
+Create seasonal menus.
+
+Order management
+
+Real-time or near-real-time order updates.
+
+New order notifications inside the dashboard.
+
+Order detail view.
+
+Change order status.
+
+Confirm or cancel orders.
+
+Add internal notes.
+
+Filter orders.
+
+Search orders.
+
+Print order receipt.
+
+Export order information where appropriate.
+
+Kitchen display
+
+Create an optional kitchen display mode with:
+
+Large readable order cards.
+
+Order number.
+
+Items and quantities.
+
+Customizations.
+
+Special instructions.
+
+Order time.
+
+Preparation status.
+
+One-click status updates.
+
+Reservation management
+
+Reservation calendar.
+
+Daily list.
+
+Weekly view.
+
+Reservation details.
+
+Guest information.
+
+Party size.
+
+Seating preferences.
+
+Confirm/reject actions.
+
+Search and filtering.
+
+Business settings
+
+Allow editing:
+
+Restaurant name.
+
+Logo.
+
+Brand colors.
+
+Address.
+
+Coordinates.
+
+Phone.
+
+Email.
+
+Social media.
+
+Opening hours.
+
+Special opening hours.
+
+Closed dates.
+
+Reservation rules.
+
+Table capacity.
+
+Delivery settings.
+
+Delivery fees.
+
+Pickup options.
+
+Minimum order values.
+
+Currency.
+
+Language settings.
+
+Payment methods.
+
+Notification settings.
+
+Content management
+
+Administrators must be able to edit:
+
+Homepage text.
+
+Restaurant story.
+
+Gallery.
+
+Promotional banners.
+
+Featured sections.
+
+Contact information.
+
+Events.
+
+FAQ content.
+
+Reports and analytics
+
+Include:
+
+Orders by day/week/month.
+
+Revenue by period.
+
+Average order value.
+
+Popular dishes.
+
+Reservation numbers.
+
+Cancellation numbers.
+
+Order completion rates.
+
+Include date filters, visual charts and CSV export.
+
+Calculate reports using real database information, not demonstration numbers presented as real revenue.
+
+16. BACKEND, DATABASE AND APPLICATION ARCHITECTURE
+
+Use the full-stack capabilities available in Google AI Studio Build Mode.
+
+Preferred architecture:
+
+React frontend.
+
+TypeScript.
+
+Modern responsive styling.
+
+Server-side Node.js runtime.
+
+Firebase Authentication.
+
+Cloud Firestore.
+
+Firebase Security Rules.
+
+Secure server endpoints for sensitive operations.
+
+Ask Google AI Studio to enable its Firebase integration when prompted.
+
+Create properly structured database collections such as:
+
+restaurantSettings
+
+menuCategories
+
+menuItems
+
+menuModifiers
+
+reservations
+
+orders
+
+deliveryZones
+
+openingHours
+
+promotions
+
+newsletterSubscribers
+
+adminUsers
+
+eventInquiries
+
+auditLogs
+
+Use consistent document schemas and timestamps.
+
+Use the Europe/Sarajevo timezone for restaurant operations.
+
+Use BAM (KM) as the default currency.
+
+Store monetary values using integer minor units or another precise decimal-safe representation. Avoid floating-point calculation errors.
+
+Security
+
+Implement:
+
+Server-side input validation.
+
+Firestore security rules.
+
+Role-based access control.
+
+Secure server-side authorization.
+
+Rate limiting on public forms.
+
+Spam protection.
+
+Protection against duplicate submissions.
+
+Safe error messages.
+
+Environment variables for secrets.
+
+Secure payment callbacks.
+
+Audit logs for important administrator operations.
+
+Public visitors must only access information that is intended to be public.
+
+Guest information, customer phone numbers, private reservation details and orders must never be publicly readable.
+
+Never allow an unauthenticated visitor to read the entire orders or reservations database.
+
+Do not place administrator credentials, private API keys or payment secrets in frontend code.
+
+17. SEO AND LOCAL SEARCH OPTIMIZATION
+
+Prepare the website for Google Search and local discovery.
+
+Implement:
+
+SEO-friendly page titles.
+
+Meta descriptions.
+
+Semantic HTML.
+
+Clean URLs.
+
+Open Graph metadata.
+
+Social sharing images.
+
+Canonical URLs.
+
+XML sitemap.
+
+robots.txt.
+
+Correct heading hierarchy.
+
+Image alt attributes.
+
+Internal links.
+
+Local keywords.
+
+Proper mobile indexing.
+
+Add appropriate JSON-LD structured data using Schema.org Restaurant/LocalBusiness where applicable.
+
+Use genuine information for:
+
+Restaurant name.
+
+Address.
+
+Phone.
+
+Cuisine.
+
+Opening hours.
+
+Price range.
+
+Menu URL.
+
+Location.
+
+Official website.
+
+Do not add fabricated review ratings, awards or unsupported business details to structured data.
+
+Prepare the website for Google Search Console and Google Business Profile integration.
+
+18. SPEED, ACCESSIBILITY AND PERFORMANCE
+
+The application must be fast, stable and accessible.
+
+Implement:
+
+WebP/AVIF image optimization where supported.
+
+Responsive image sizing.
+
+Lazy loading for below-the-fold images.
+
+Proper image dimensions to avoid layout shifts.
+
+Lightweight animations.
+
+Efficient component rendering.
+
+Code splitting where appropriate.
+
+Good loading states.
+
+Proper error states.
+
+Accessible forms.
+
+Keyboard navigation.
+
+Visible focus indicators.
+
+Strong color contrast.
+
+Semantic landmarks.
+
+Screen-reader labels.
+
+Aim for good Core Web Vitals:
+
+LCP: 2.5 seconds or less.
+
+INP: below 200 milliseconds.
+
+CLS: 0.1 or less.
+
+Target WCAG 2.2 AA accessibility practices wherever applicable.
+
+Do not block browser zoom on mobile devices.
+
+19. PRIVACY, LEGAL AND CUSTOMER TRUST
+
+Create editable pages for:
+
+Privacy Policy.
+
+Cookie Policy.
+
+Terms and Conditions.
+
+Delivery and Returns / Cancellation Policy.
+
+Allergen Information.
+
+Include an appropriate cookie consent interface when analytics or non-essential marketing technologies are used.
+
+Do not activate non-essential tracking technologies before the required consent.
+
+Do not fabricate legal claims or present placeholder legal content as approved legal advice.
+
+Clearly distinguish demonstration content from production business information.
+
+20. USER EXPERIENCE DETAILS
+
+Every interactive element must have a purpose.
+
+Implement:
+
+Loading indicators.
+
+Success messages.
+
+Error messages.
+
+Form validation.
+
+Empty states.
+
+Confirmation dialogs.
+
+Disabled button states.
+
+Toast notifications.
+
+Accessible modals.
+
+Useful error recovery.
+
+Clear next steps.
+
+Examples:
+
+When a customer adds a dish:
+Display a clear confirmation and update the shopping cart count.
+
+When an order is submitted:
+Display a confirmation with a unique order number.
+
+When a reservation is submitted:
+Clearly state whether it is pending or confirmed.
+
+When a menu item becomes unavailable:
+Prevent new orders for that item and update the public interface.
+
+When delivery is unavailable:
+Explain the reason and provide pickup alternatives when possible.
+
+Never display fake confirmation messages for actions that failed to reach the backend.
+
+21. DEMONSTRATION CONTENT
+
+Seed the demonstration restaurant with realistic sample content.
+
+Create:
+
+At least 8 menu categories.
+
+At least 24 food items.
+
+At least 8 drink items.
+
+High-quality dish images.
+
+Descriptions.
+
+Sample prices in BAM.
+
+Sample allergens.
+
+Dietary tags.
+
+Sample opening hours.
+
+Sample restaurant photographs.
+
+Sample promotional offers.
+
+All demonstration data must be clearly editable and identified as demo content.
+
+Never present fictional bookings, fake orders or imaginary sales as actual restaurant activity.
+
+Build the system so a real restaurant can replace the demonstration content without changing source code.
+
+22. TECHNICAL TESTING AND QUALITY ASSURANCE
+
+This section is mandatory.
+
+Do not stop when the homepage looks complete.
+
+Test the entire application.
+
+Navigation tests
+
+Every navigation item opens the correct page.
+
+All links work.
+
+All buttons work.
+
+No dead links.
+
+No placeholder navigation.
+
+No accidental page reloads or broken routes.
+
+Menu tests
+
+Categories load.
+
+Items load.
+
+Search works.
+
+Filters work.
+
+Prices display correctly.
+
+Unavailable products cannot be ordered.
+
+Product customization works.
+
+Cart and checkout tests
+
+Add items.
+
+Remove items.
+
+Update quantities.
+
+Apply modifiers.
+
+Calculate subtotals.
+
+Calculate delivery fees.
+
+Apply valid discounts.
+
+Reject invalid discount codes.
+
+Validate customer information.
+
+Prevent duplicate submissions.
+
+Persist successful orders.
+
+Reservation tests
+
+Select date.
+
+Select party size.
+
+Display valid time slots.
+
+Reject unavailable slots.
+
+Respect closed days.
+
+Prevent capacity conflicts.
+
+Save reservation data.
+
+Update reservation status.
+
+Verify administrator permissions.
+
+Google Maps tests
+
+Map loads.
+
+Location marker is correct when configured.
+
+Directions open correctly.
+
+Fallback works when the map integration is not configured.
+
+Admin tests
+
+Login works.
+
+Unauthorized users are blocked.
+
+Administrator can manage menu items.
+
+Administrator can update availability.
+
+Administrator can manage orders.
+
+Administrator can manage reservations.
+
+Settings persist after refresh.
+
+Database permissions are correctly enforced.
+
+Responsive tests
+
+Inspect all major pages at the required screen widths.
+
+Verify:
+
+No overlapping components.
+
+No horizontal overflow.
+
+No broken navigation.
+
+No hidden buttons.
+
+No unreadable text.
+
+No broken image layouts.
+
+Functional checkout on mobile.
+
+Functional reservations on mobile.
+
+Error handling
+
+Inspect:
+
+Browser console errors.
+
+Server errors.
+
+Failed requests.
+
+Database errors.
+
+Missing environment variables.
+
+Broken images.
+
+Invalid inputs.
+
+Failed submissions.
+
+Authentication failures.
+
+Fix all identifiable critical and high-priority issues.
+
+Where automated test tooling is supported, create and run appropriate unit, integration and end-to-end tests.
+
+Do not simply claim that all tests passed. Report the tests actually performed and their results.
+
+23. FINAL DELIVERABLES
+
+Deliver the complete working application, including:
+
+Responsive public restaurant website.
+
+Complete digital menu.
+
+Online ordering system.
+
+Shopping cart and checkout.
+
+Table reservation system.
+
+Google Maps integration.
+
+Customer order tracking.
+
+Secure administrator login.
+
+Administrator dashboard.
+
+Kitchen display interface.
+
+Menu management.
+
+Order management.
+
+Reservation management.
+
+Restaurant settings.
+
+Promotions management.
+
+Analytics and reporting.
+
+SEO implementation.
+
+Database integration.
+
+Security rules.
+
+Required integration configuration.
+
+Also create:
+
+README.md — project overview and setup.
+
+ADMIN_GUIDE.md — administrator instructions.
+
+ENVIRONMENT.md — required environment variables and external credentials.
+
+TEST_PLAN.md — tests performed and results.
+
+DEPLOYMENT.md — deployment and domain configuration.
+
+Clearly identify which features are fully operational, which require external credentials, and which require activation by the restaurant owner.
+
+24. FINAL DEVELOPMENT INSTRUCTIONS
+
+Work systematically.
+
+First establish the complete application architecture.
+
+Then implement the frontend, backend, data models, integrations and administrator interface.
+
+Do not spend the entire development effort on visual design while leaving the backend incomplete.
+
+Do not substitute static mock data for essential live application functionality.
+
+Do not create decorative buttons that do nothing.
+
+Do not simulate successful orders, payments, reservations or emails.
+
+Do not expose secrets.
+
+Do not ignore errors.
+
+Do not sacrifice mobile usability for desktop aesthetics.
+
+Do not leave unfinished sections.
+
+If an external integration requires a merchant account, credentials, permissions or API setup, implement the integration architecture, create the appropriate configuration interface, document the exact steps and clearly identify the remaining requirement.
+
+Prioritize a working, reliable and maintainable system over unnecessary visual effects.
+
+Before declaring the application complete, run the full available test suite, inspect all major pages and fix the issues you discover.
+
+FINAL GOAL: Deliver a premium, fully responsive, professionally engineered restaurant website and digital management platform that could realistically be presented to an international restaurant client as a professional commercial web development project.
