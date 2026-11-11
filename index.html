@@ -3,24 +3,23 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atelier Bistro - Fine Dining &amp; Modern Mediterranean Gastronomy</title>
-    <meta name="description" content="Atelier Bistro contemporary international and Mediterranean cuisine in Sarajevo. Online food ordering, table reservations, chef specials, and digital management platform.">
+    <title>Atelier Bistro Sarajevo | Mediterranean Restaurant</title>
+   <meta name="description" content="Discover Atelier Bistro in Sarajevo, offering contemporary Mediterranean cuisine, carefully prepared dishes, and an inviting dining experience. Explore our menu and reservations.">
     <link rel="canonical" href="https://ateliergastro.netlify.app/">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     
-    <!-- Open Graph Metadata -->
-    <meta property="og:title" content="Atelier Bistro - Fine Dining &amp; Modern Mediterranean Gastronomy">
-    <meta property="og:description" content="Atelier Bistro contemporary international and Mediterranean cuisine in Sarajevo. Online food ordering, table reservations, chef specials, and digital management platform.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ateliergastro.netlify.app/">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&auto=format&fit=crop&q=80">
+   <!-- Open Graph Metadata -->
+<meta property="og:title" content="Atelier Bistro Sarajevo | Mediterranean Restaurant">
+<meta property="og:description" content="Discover contemporary Mediterranean cuisine and an inviting dining experience at Atelier Bistro in Sarajevo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ateliergastro.netlify.app/">
+<meta property="og:image" content="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&auto=format&fit=crop&q=80">
     
-    <!-- Twitter Metadata -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Atelier Bistro - Fine Dining &amp; Modern Mediterranean Gastronomy">
-    <meta name="twitter:description" content="Atelier Bistro contemporary international and Mediterranean cuisine in Sarajevo. Online food ordering, table reservations, chef specials, and digital management platform.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&auto=format&fit=crop&q=80">
-    
+   <!-- Twitter Metadata -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Atelier Bistro Sarajevo | Mediterranean Restaurant">
+<meta name="twitter:description" content="Discover contemporary Mediterranean cuisine at Atelier Bistro in Sarajevo. Explore our menu and dining experience.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&auto=format&fit=crop&q=80">
     <!-- CDNs and Critical Resource Preconnects -->
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,52 +49,68 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">
     </noscript>
 
-    <!-- Schema.org JSON-LD Structured Data for Restaurant -->
-    <script type="application/ld+json">
+    
+<!-- Schema.org JSON-LD Structured Data - Atelier Bistro -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "@id": "https://ateliergastro.netlify.app/#restaurant",
+  "name": "Atelier Bistro",
+  "url": "https://ateliergastro.netlify.app/",
+  "image": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&auto=format&fit=crop&q=80",
+  "telephone": "+38733214890",
+  "priceRange": "$$$",
+  "servesCuisine": [
+    "Mediterranean",
+    "Contemporary International",
+    "Adriatic Seafood"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Obala Kulina bana 24",
+    "addressLocality": "Sarajevo",
+    "postalCode": "71000",
+    "addressCountry": "BA"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 43.8584,
+    "longitude": 18.4285
+  },
+  "openingHoursSpecification": [
     {
-      "@context": "https://schema.org",
-      "@type": "Restaurant",
-      "name": "Atelier Bistro",
-      "image": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&auto=format&fit=crop&q=80",
-      "url": "https://ateliergastro.netlify.app/",
-      "telephone": "+38733214890",
-      "priceRange": "$$$",
-      "servesCuisine": ["Mediterranean", "Contemporary International", "Adriatic Seafood"],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Obala Kulina bana 24",
-        "addressLocality": "Sarajevo",
-        "postalCode": "71000",
-        "addressCountry": "BA"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 43.8584,
-        "longitude": 18.4285
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
-          "opens": "08:00",
-          "closes": "23:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Friday", "Saturday"],
-          "opens": "08:00",
-          "closes": "00:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Sunday",
-          "opens": "10:00",
-          "closes": "22:00"
-        }
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday"
       ],
-      "acceptsReservations": "True"
+      "opens": "08:00",
+      "closes": "23:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "08:00",
+      "closes": "00:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "10:00",
+      "closes": "22:00"
     }
-    </script>
+  ],
+  "acceptsReservations": true,
+  "hasMenu": "https://ateliergastro.netlify.app/?view=menu"
+}
+</script>
+
   </head>
   <body class="bg-[#F7F4ED] text-[#20221F] font-sans antialiased selection:bg-[#B66F52] selection:text-white">
     <div id="root"></div>
