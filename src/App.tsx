@@ -54,8 +54,8 @@ const LegalModal = lazy(() =>
 
 const PageLoadingFallback: React.FC = () => (
   <div className="min-h-[50vh] flex flex-col items-center justify-center p-8 text-center" aria-live="polite" aria-busy="true">
-    <div className="w-10 h-10 rounded-full border-3 border-[#59634A]/30 border-t-[#B66F52] animate-spin mb-3" />
-    <span className="text-xs uppercase tracking-widest text-[#20221F]/70 font-medium">Učitavanje...</span>
+    <div className="w-10 h-10 rounded-full border-3 border-[#C5A059]/30 border-t-[#C5A059] animate-spin mb-3" />
+    <span className="text-xs uppercase tracking-widest text-[#121417]/70 font-medium">Učitavanje...</span>
   </div>
 );
 
@@ -102,7 +102,7 @@ function MainApp() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F4ED] text-[#20221F] flex flex-col antialiased selection:bg-[#B66F52] selection:text-white">
+    <div className="min-h-screen bg-[#FAF8F5] text-[#121417] flex flex-col antialiased selection:bg-[#C5A059] selection:text-white">
       
       {/* Google Maps Quota Defense Banner */}
       {quotaReached && (

@@ -58,18 +58,18 @@ export const MapLocationSection: React.FC = () => {
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${settings.lat},${settings.lng}`;
 
   return (
-    <section className="py-20 bg-[#F7F4ED] text-[#20221F] border-t border-[#E9E1D4]">
+    <section className="py-20 bg-[#FAF8F5] text-[#121417] border-t border-[#E8E2D6]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] font-semibold text-[#3F4734] mb-2">
-            <MapPin className="w-3.5 h-3.5 text-[#96472C]" />
+          <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] font-bold text-[#8E723B] mb-2">
+            <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
             <span>{language === 'bs' ? 'Lokacija & Pristup' : 'Location & Directions'}</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#20221F]">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#121417]">
             {language === 'bs' ? 'Posjetite Nas u Srcu Sarajeva' : 'Visit Atelier Bistro'}
           </h2>
-          <p className="text-xs sm:text-sm text-[#20221F]/70 mt-3 font-light">
+          <p className="text-xs sm:text-sm text-[#121417]/70 mt-3 font-light">
             {language === 'bs'
               ? 'Nalazimo se na Obali Kulina bana, nekoliko koraka od Latinske ćuprije i historijskog centra grada.'
               : 'Situated along Obala Kulina bana, just steps away from the historic Latin Bridge in Sarajevo.'}
@@ -79,52 +79,52 @@ export const MapLocationSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Information Card (5 cols) */}
-          <div className="lg:col-span-5 bg-white rounded-2xl p-6 sm:p-8 border border-[#E9E1D4] shadow-md flex flex-col justify-between">
+          <div className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-[#E8E2D6] shadow-[0_4px_24px_rgba(18,20,23,0.04)] flex flex-col justify-between">
             <div className="space-y-6">
               
               <div>
-                <h3 className="font-serif text-2xl font-semibold text-[#20221F]">
+                <h3 className="font-serif text-2xl font-semibold text-[#121417]">
                   {settings.name}
                 </h3>
-                <p className="text-xs text-[#3F4734] uppercase tracking-wider font-medium mt-0.5">
+                <p className="text-xs text-[#8E723B] uppercase tracking-wider font-semibold mt-0.5">
                   Sarajevo, Bosna i Hercegovina
                 </p>
               </div>
 
-              <div className="space-y-3 text-xs sm:text-sm text-[#20221F]/80">
+              <div className="space-y-3.5 text-xs sm:text-sm text-[#121417]/80">
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-[#96472C] shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-semibold block text-[#20221F]">{settings.address}</span>
+                    <span className="font-semibold block text-[#121417]">{settings.address}</span>
                     <span>{settings.postalCode} {settings.city}, {settings.country}</span>
-                    <span className="text-[11px] text-[#20221F]/70 block mt-0.5">
+                    <span className="text-[11px] text-[#121417]/60 block mt-0.5">
                       GPS: {settings.lat.toFixed(4)}°N, {settings.lng.toFixed(4)}°E
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-[#3F4734] shrink-0" />
-                  <a href={`tel:${settings.phone}`} className="hover:text-[#96472C] font-semibold transition-colors">
+                  <Phone className="w-4 h-4 text-[#8E723B] shrink-0" />
+                  <a href={`tel:${settings.phone}`} className="hover:text-[#C5A059] font-semibold transition-colors">
                     {settings.phone}
                   </a>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Clock className="w-4 h-4 text-[#3F4734] shrink-0 mt-0.5" />
+                  <Clock className="w-4 h-4 text-[#8E723B] shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-semibold block text-[#20221F]">
+                    <span className="font-semibold block text-[#121417]">
                       {language === 'bs' ? 'Svaki dan: 08:00 - 23:00 / 00:00' : 'Daily: 08:00 - 23:00 / 00:00'}
                     </span>
-                    <span className="text-[11px] text-[#20221F]/60">
+                    <span className="text-[11px] text-[#121417]/60">
                       {language === 'bs' ? 'Rezervacije preporučujemo u večernjim terminima' : 'Evening bookings recommended'}
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3 pt-1">
-                  <Car className="w-4 h-4 text-[#3F4734] shrink-0 mt-0.5" />
-                  <span className="text-xs text-[#20221F]/70">
+                  <Car className="w-4 h-4 text-[#8E723B] shrink-0 mt-0.5" />
+                  <span className="text-xs text-[#121417]/70">
                     {language === 'bs' 
                       ? 'Dostupan parking u obližnjoj garaži Sarajevo City Centar / Vijećnica (3 min hoda).'
                       : 'Public parking garage available within 3 minutes walking distance.'}
@@ -135,12 +135,12 @@ export const MapLocationSection: React.FC = () => {
             </div>
 
             {/* Direction Navigation Buttons */}
-            <div className="pt-8 border-t border-[#E9E1D4] flex flex-col sm:flex-row gap-3">
+            <div className="pt-8 border-t border-[#E8E2D6] flex flex-col sm:flex-row gap-3">
               <a
                 href={directionsUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 py-3 px-4 rounded-xl bg-[#59634A] hover:bg-[#3F4734] text-white text-xs font-semibold tracking-wider uppercase transition-colors flex items-center justify-center gap-2 shadow-sm"
+                className="flex-1 py-3 px-4 rounded-xl bg-[#121417] hover:bg-[#C5A059] hover:text-[#121417] text-white text-xs font-bold tracking-wider uppercase transition-all flex items-center justify-center gap-2 shadow-sm"
               >
                 <Navigation className="w-4 h-4" />
                 <span>{language === 'bs' ? 'Upute za Vožnju' : 'Get Directions'}</span>
@@ -150,9 +150,9 @@ export const MapLocationSection: React.FC = () => {
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="py-3 px-4 rounded-xl border border-[#E9E1D4] hover:bg-[#F7F4ED] text-[#20221F] text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                className="py-3 px-4 rounded-xl border border-[#E8E2D6] hover:bg-[#FAF8F5] text-[#121417] text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
               >
-                <ExternalLink className="w-4 h-4 text-[#3F4734]" />
+                <ExternalLink className="w-4 h-4 text-[#8E723B]" />
                 <span>Google Maps</span>
               </a>
             </div>
@@ -162,7 +162,7 @@ export const MapLocationSection: React.FC = () => {
           {/* Interactive Map Container (7 cols) with Deferred On-Demand Loading */}
           <div
             ref={mapContainerRef}
-            className="lg:col-span-7 h-[420px] rounded-2xl overflow-hidden border border-[#E9E1D4] shadow-md relative bg-[#E9E1D4]/40"
+            className="lg:col-span-7 h-[420px] rounded-3xl overflow-hidden border border-[#E8E2D6] shadow-[0_4px_24px_rgba(18,20,23,0.04)] relative bg-[#EDE7DD]/40"
           >
             {isMapRequested ? (
               <Suspense

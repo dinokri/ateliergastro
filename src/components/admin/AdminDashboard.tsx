@@ -80,43 +80,43 @@ const AdminDashboardContent: React.FC = () => {
   // Login Gate if not admin
   if (!isAdmin) {
     return (
-      <div className="min-h-screen bg-[#20221F] text-[#F7F4ED] flex items-center justify-center p-4">
-        <div className="bg-[#2D302B] max-w-md w-full p-8 rounded-3xl border border-[#3F4734] shadow-2xl text-center space-y-6">
-          <div className="w-16 h-16 rounded-full bg-[#59634A]/30 text-[#B66F52] mx-auto flex items-center justify-center border border-[#59634A]">
+      <div className="min-h-screen bg-[#121417] text-[#FAF8F5] flex items-center justify-center p-4">
+        <div className="bg-[#1A1D22] max-w-md w-full p-8 rounded-3xl border border-[#C5A059]/40 shadow-2xl text-center space-y-6">
+          <div className="w-16 h-16 rounded-full bg-[#C5A059]/15 text-[#C5A059] mx-auto flex items-center justify-center border border-[#C5A059]/40 shadow-inner">
             <Lock className="w-8 h-8" />
           </div>
 
           <div>
-            <h1 className="font-serif text-3xl font-semibold tracking-wide">
+            <h1 className="font-serif text-3xl font-semibold tracking-wide text-[#FAF8F5]">
               Atelier Bistro Admin
             </h1>
-            <p className="text-xs text-[#E9E1D4]/70 mt-1">
+            <p className="text-xs text-[#FAF8F5]/70 mt-1">
               {language === 'bs' 
                 ? 'Zaštićeni portal za upravljanje restoranom, narudžbama i jelovnikom.' 
                 : 'Restricted administrative portal for restaurant operations.'}
             </p>
           </div>
 
-          <div className="p-4 bg-[#20221F] rounded-2xl border border-[#3F4734] text-left text-xs space-y-1">
-            <span className="text-[#B66F52] font-semibold block">Ovlašteni nalog:</span>
-            <p className="text-stone-300 font-mono">dinokrickovic555@gmail.com</p>
+          <div className="p-4 bg-[#121417] rounded-2xl border border-[#C5A059]/30 text-left text-xs space-y-1">
+            <span className="text-[#C5A059] font-bold block uppercase tracking-wider text-[10px]">Ovlašteni Administrator:</span>
+            <p className="text-white font-mono font-semibold text-sm">dinokrickovic555@gmail.com</p>
           </div>
 
           <div className="space-y-3">
             <button
               onClick={() => loginWithGoogle()}
-              className="w-full py-3.5 px-4 rounded-xl bg-[#B66F52] hover:bg-[#96533A] text-white font-semibold text-xs tracking-wider uppercase transition-colors shadow flex items-center justify-center gap-2"
+              className="w-full py-3.5 px-4 rounded-xl bg-[#C5A059] hover:bg-[#B38E46] text-[#121417] font-bold text-xs tracking-wider uppercase transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
             >
-              <LogIn className="w-4 h-4" />
-              <span>Prijava putem Google Računa</span>
+              <LogIn className="w-4 h-4 text-[#121417]" />
+              <span>Prijava kao Dino Kričković (Admin)</span>
             </button>
 
             {/* Quick Demo Access for Staff */}
             <button
               onClick={simulateAdminAccess}
-              className="w-full py-2.5 px-4 rounded-xl border border-[#59634A] text-[#E9E1D4] hover:bg-[#3F4734] text-xs font-medium transition-colors"
+              className="w-full py-2.5 px-4 rounded-xl border border-white/20 text-[#FAF8F5]/80 hover:bg-white/10 text-xs font-medium transition-colors"
             >
-              Uđi kao demonstrator / Menadžer
+              Uđi direktno u demonstracijski mod
             </button>
           </div>
 
@@ -213,30 +213,29 @@ const AdminDashboardContent: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#F7F4ED] text-[#20221F] flex flex-col">
+    <div className="min-h-screen bg-[#FAF8F5] text-[#121417] flex flex-col">
       
       {/* Top Admin Navigation Bar */}
-      <nav className="bg-[#20221F] text-[#F7F4ED] px-4 sm:px-8 py-3.5 border-b border-[#3F4734] flex items-center justify-between">
+      <nav className="bg-[#121417] text-[#FAF8F5] px-4 sm:px-8 py-3.5 border-b border-[#C5A059]/30 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="font-serif text-xl tracking-wider font-bold uppercase text-[#F7F4ED]">
+          <span className="font-serif text-xl tracking-wider font-bold uppercase text-[#FAF8F5]">
             {settings.name}
           </span>
-          <span className="px-2 py-0.5 rounded bg-[#59634A] text-white text-[10px] font-bold uppercase tracking-wider">
+          <span className="px-2.5 py-0.5 rounded-full bg-[#C5A059]/20 border border-[#C5A059]/40 text-[#C5A059] text-[10px] font-bold uppercase tracking-wider">
             Upravljački Panel
           </span>
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="hidden sm:flex flex-col text-right">
-            <span className="text-xs font-semibold text-white">
-              {user?.email || 'Ovlašteni Administrator'}
-            </span>
-            <span className="text-[10px] text-stone-400">Restoran Sarajevo</span>
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-semibold font-mono">{user?.email || 'dinokrickovic555@gmail.com'}</span>
+            <span className="text-[10px] text-emerald-400 uppercase font-bold tracking-wider">(Administrator)</span>
           </div>
 
           <button
             onClick={() => logout()}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#3F4734] hover:bg-[#3F4734] text-xs font-semibold text-stone-300 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/20 hover:bg-white/10 text-xs font-semibold text-stone-300 hover:text-white transition-colors"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>Odjavi se</span>
@@ -247,7 +246,7 @@ const AdminDashboardContent: React.FC = () => {
       <div className="flex-1 flex flex-col md:flex-row">
         
         {/* Sidebar Tabs */}
-        <aside className="w-full md:w-64 bg-white border-r border-[#E9E1D4] p-4 flex md:flex-col gap-1 overflow-x-auto md:overflow-visible shrink-0 shadow-sm">
+        <aside className="w-full md:w-64 bg-white border-r border-[#E8E2D6] p-4 flex md:flex-col gap-1 overflow-x-auto md:overflow-visible shrink-0 shadow-xs">
           {[
             { id: 'overview', label: 'Pregled (Overview)', icon: LayoutDashboard },
             { id: 'orders', label: 'Narudžbe', icon: ShoppingBag, badge: pendingOrdersCount > 0 ? pendingOrdersCount : undefined },
@@ -265,16 +264,16 @@ const AdminDashboardContent: React.FC = () => {
                 onClick={() => setActiveAdminTab(tab.id as any)}
                 className={`flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-semibold tracking-wide transition-all shrink-0 md:w-full ${
                   active
-                    ? 'bg-[#59634A] text-white shadow-sm'
-                    : 'text-[#20221F]/80 hover:bg-[#F7F4ED]'
+                    ? 'bg-[#121417] text-[#C5A059] shadow-sm font-bold'
+                    : 'text-[#121417]/75 hover:bg-[#FAF8F5] hover:text-[#121417]'
                 }`}
               >
                 <div className="flex items-center gap-2.5">
-                  <Icon className="w-4 h-4 shrink-0" />
+                  <Icon className={`w-4 h-4 ${active ? 'text-[#C5A059]' : 'text-stone-400'}`} />
                   <span>{tab.label}</span>
                 </div>
                 {tab.badge !== undefined && (
-                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${active ? 'bg-white text-[#59634A]' : 'bg-[#B66F52] text-white'}`}>
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#9B412D] text-white animate-pulse">
                     {tab.badge}
                   </span>
                 )}

@@ -58,23 +58,23 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
 
       <div className="absolute inset-y-0 right-0 max-w-full flex pl-10">
         <div 
-          className="w-screen max-w-md bg-white text-[#20221F] shadow-2xl flex flex-col justify-between border-l border-[#E9E1D4] animate-in slide-in-from-right duration-300"
+          className="w-screen max-w-md bg-white text-[#121417] shadow-2xl flex flex-col justify-between border-l border-[#E8E2D6] animate-in slide-in-from-right duration-300"
           role="dialog"
           aria-modal="true"
           aria-labelledby="cart-drawer-title"
         >
           
           {/* Header */}
-          <div className="p-6 bg-[#F7F4ED] border-b border-[#E9E1D4] flex items-center justify-between">
+          <div className="p-6 bg-[#FAF8F5] border-b border-[#E8E2D6] flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 bg-[#20221F] text-[#F7F4ED] rounded-xl shadow-sm">
-                <ShoppingBag className="w-5 h-5" />
+              <div className="p-2 bg-[#121417] text-[#FAF8F5] rounded-xl shadow-sm">
+                <ShoppingBag className="w-5 h-5 text-[#C5A059]" />
               </div>
               <div>
-                <h2 id="cart-drawer-title" className="font-serif text-xl font-semibold text-[#20221F]">
+                <h2 id="cart-drawer-title" className="font-serif text-xl font-semibold text-[#121417]">
                   {language === 'bs' ? 'Vaša Korpa' : 'Your Order Cart'}
                 </h2>
-                <span className="text-xs text-[#59634A] font-medium">
+                <span className="text-xs text-[#C5A059] font-medium tracking-wide">
                   {cart.length} {language === 'bs' ? 'stavki' : 'items'}
                 </span>
               </div>
@@ -82,7 +82,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
 
             <button
               onClick={() => setIsCartOpen(false)}
-              className="p-2 rounded-xl text-stone-500 hover:text-[#20221F] hover:bg-[#E9E1D4] transition-colors"
+              className="p-2 rounded-xl text-stone-400 hover:text-[#121417] hover:bg-[#FAF8F5] transition-colors"
               aria-label="Zatvori korpu"
             >
               <X className="w-5 h-5" />
@@ -91,10 +91,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
 
           {/* Free Delivery Bar */}
           {settings.isDeliveryEnabled && (
-            <div className="bg-[#E9E1D4]/40 px-6 py-2.5 border-b border-[#E9E1D4] text-xs">
+            <div className="bg-[#FAF8F5]/80 px-6 py-2.5 border-b border-[#E8E2D6] text-xs">
               {freeDeliveryRemainder > 0 ? (
-                <div className="flex items-center gap-2 text-[#59634A]">
-                  <Sparkles className="w-4 h-4 text-[#B66F52] shrink-0" />
+                <div className="flex items-center gap-2 text-[#121417]/80">
+                  <Sparkles className="w-4 h-4 text-[#C5A059] shrink-0" />
                   <span>
                     {language === 'bs' 
                       ? `Dodajte još ${freeDeliveryRemainder.toFixed(2)} KM za besplatnu dostavu!`
@@ -134,17 +134,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
               cart.map((item) => (
                 <div
                   key={item.cartItemId}
-                  className="p-3.5 rounded-xl border border-[#E9E1D4] bg-[#F7F4ED]/30 hover:bg-[#F7F4ED]/60 transition-colors flex gap-3 items-start"
+                  className="p-3.5 rounded-2xl border border-[#E8E2D6] bg-[#FAF8F5]/50 hover:bg-[#FAF8F5] transition-colors flex gap-3 items-start"
                 >
                   <img
                     src={item.menuItem.imageUrl}
                     alt={item.menuItem.name}
-                    className="w-16 h-16 rounded-lg object-cover shrink-0 border border-[#E9E1D4]"
+                    className="w-16 h-16 rounded-xl object-cover shrink-0 border border-[#E8E2D6]"
                   />
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-1">
-                      <h4 className="text-xs font-bold text-[#20221F] truncate">
+                      <h4 className="text-xs font-bold text-[#121417] truncate">
                         {language === 'bs' ? item.menuItem.name : item.menuItem.nameEn}
                       </h4>
                       <button
@@ -158,7 +158,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
 
                     {/* Variant and Extras details */}
                     {item.selectedVariant && (
-                      <p className="text-[11px] text-[#59634A] font-medium">
+                      <p className="text-[11px] text-[#C5A059] font-medium">
                         {language === 'bs' ? item.selectedVariant.name : item.selectedVariant.nameEn}
                       </p>
                     )}
@@ -176,25 +176,25 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
                     )}
 
                     {/* Price and Quantity Controls */}
-                    <div className="flex items-center justify-between mt-2 pt-1 border-t border-[#E9E1D4]/40">
-                      <span className="font-serif text-sm font-bold text-[#B66F52]">
+                    <div className="flex items-center justify-between mt-2 pt-1 border-t border-[#E8E2D6]/40">
+                      <span className="font-serif text-sm font-bold text-[#C5A059]">
                         {item.lineTotal.toFixed(2)} KM
                       </span>
 
-                      <div className="flex items-center border border-[#E9E1D4] bg-white rounded-lg">
+                      <div className="flex items-center border border-[#E8E2D6] bg-white rounded-lg">
                         <button
                           onClick={() => updateCartQuantity(item.cartItemId, -1)}
-                          className="p-1 text-stone-600 hover:text-black transition-colors"
+                          className="p-1 text-stone-600 hover:text-[#121417] transition-colors"
                           aria-label="Smanji količinu"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="px-2 text-xs font-bold text-[#20221F]">
+                        <span className="px-2 text-xs font-bold text-[#121417]">
                           {item.quantity}
                         </span>
                         <button
                           onClick={() => updateCartQuantity(item.cartItemId, 1)}
-                          className="p-1 text-stone-600 hover:text-black transition-colors"
+                          className="p-1 text-stone-600 hover:text-[#121417] transition-colors"
                           aria-label="Povećaj količinu"
                         >
                           <Plus className="w-3 h-3" />
@@ -210,7 +210,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
 
           {/* Footer Calculations & Checkout Button */}
           {cart.length > 0 && (
-            <div className="p-6 bg-[#F7F4ED] border-t border-[#E9E1D4] space-y-4">
+            <div className="p-6 bg-[#FAF8F5] border-t border-[#E8E2D6] space-y-4">
               
               {/* Promo code form */}
               {appliedPromo ? (
@@ -234,11 +234,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
                       value={promoInput}
                       onChange={(e) => setPromoInput(e.target.value)}
                       placeholder={language === 'bs' ? 'Unesite kupon (npr. ATELIER15)' : 'Promo code (e.g. ATELIER15)'}
-                      className="text-xs uppercase px-3 py-2 rounded-lg border border-[#E9E1D4] bg-white focus:outline-none focus:border-[#B66F52] flex-1"
+                      className="text-xs uppercase px-3 py-2 rounded-xl border border-[#E8E2D6] bg-white focus:outline-none focus:border-[#C5A059] flex-1"
                     />
                     <button
                       type="submit"
-                      className="px-3 py-2 rounded-lg bg-[#59634A] text-white text-xs font-semibold hover:bg-[#3F4734] transition-colors"
+                      className="px-4 py-2 rounded-xl bg-[#121417] text-white text-xs font-semibold hover:bg-[#C5A059] hover:text-[#121417] transition-colors"
                     >
                       {language === 'bs' ? 'Primijeni' : 'Apply'}
                     </button>
@@ -252,16 +252,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
               )}
 
               {/* Subtotal, delivery, total */}
-              <div className="space-y-1.5 text-xs text-[#20221F]/80">
+              <div className="space-y-1.5 text-xs text-[#121417]/80">
                 <div className="flex justify-between">
                   <span>{language === 'bs' ? 'Međuzbir' : 'Subtotal'}</span>
-                  <span className="font-semibold text-[#20221F]">{cartSubtotal.toFixed(2)} KM</span>
+                  <span className="font-semibold text-[#121417]">{cartSubtotal.toFixed(2)} KM</span>
                 </div>
 
                 {settings.isDeliveryEnabled && (
                   <div className="flex justify-between">
                     <span>{language === 'bs' ? 'Dostava (Sarajevo zona)' : 'Standard Delivery'}</span>
-                    <span className="font-semibold text-[#20221F]">
+                    <span className="font-semibold text-[#121417]">
                       {deliveryFee === 0 ? (
                         <span className="text-emerald-700 uppercase font-bold">{language === 'bs' ? 'Besplatno' : 'Free'}</span>
                       ) : (
@@ -278,9 +278,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
                   </div>
                 )}
 
-                <div className="flex justify-between text-sm sm:text-base font-bold text-[#20221F] pt-2 border-t border-[#E9E1D4]">
+                <div className="flex justify-between text-sm sm:text-base font-bold text-[#121417] pt-2 border-t border-[#E8E2D6]">
                   <span>{language === 'bs' ? 'Ukupno za plaćanje' : 'Final Total'}</span>
-                  <span className="font-serif text-lg text-[#B66F52]">{cartTotal.toFixed(2)} KM</span>
+                  <span className="font-serif text-lg text-[#C5A059] font-bold">{cartTotal.toFixed(2)} KM</span>
                 </div>
               </div>
 
@@ -290,7 +290,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
                   setIsCartOpen(false);
                   onProceedToCheckout();
                 }}
-                className="w-full py-3.5 px-6 rounded-xl bg-[#B66F52] hover:bg-[#96533A] text-white text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all shadow-md flex items-center justify-center gap-2"
+                className="w-full py-3.5 px-6 rounded-xl bg-[#C5A059] hover:bg-[#B38E46] text-[#121417] text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
               >
                 <span>{language === 'bs' ? 'Nastavi na Plaćanje' : 'Proceed to Checkout'}</span>
                 <ArrowRight className="w-4 h-4" />

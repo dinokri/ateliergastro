@@ -49,13 +49,13 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({ dish, onClose 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
       <div 
-        className="bg-white text-[#20221F] w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl border border-[#E9E1D4] max-h-[90vh] flex flex-col animate-in zoom-in-95 duration-200"
+        className="bg-white text-[#121417] w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl border border-[#E8E2D6] max-h-[90vh] flex flex-col animate-in zoom-in-95 duration-200"
         role="dialog"
         aria-modal="true"
         aria-labelledby="dish-modal-title"
       >
         {/* Modal Header Image */}
-        <div className="relative h-64 sm:h-72 w-full bg-[#E9E1D4]/40 shrink-0">
+        <div className="relative h-64 sm:h-72 w-full bg-[#E8E2D6]/40 shrink-0">
           <img
             src={dish.imageUrl}
             alt={language === 'bs' ? dish.name : dish.nameEn}
@@ -68,7 +68,7 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({ dish, onClose 
 
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2.5 rounded-full bg-[#20221F]/80 hover:bg-[#20221F] text-white shadow-lg transition-transform hover:scale-105"
+            className="absolute top-4 right-4 p-2.5 rounded-full bg-[#121417]/80 hover:bg-[#121417] text-white shadow-lg transition-transform hover:scale-105"
             aria-label="Zatvori prozor sa detaljima"
           >
             <X className="w-5 h-5" />
@@ -76,12 +76,12 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({ dish, onClose 
 
           <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
             {dish.isChefRecommendation && (
-              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#59634A] text-white shadow">
+              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#C5A059] text-[#121417] shadow font-serif">
                 {language === 'bs' ? 'Chef’s Choice' : 'Chef’s Choice'}
               </span>
             )}
             {dish.isBestseller && (
-              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#B66F52] text-white shadow">
+              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#9B412D] text-white shadow font-serif">
                 Bestseller
               </span>
             )}
@@ -98,34 +98,34 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({ dish, onClose 
           
           <div>
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-2">
-              <h2 id="dish-modal-title" className="font-serif text-2xl sm:text-3xl font-semibold text-[#20221F]">
+              <h2 id="dish-modal-title" className="font-serif text-2xl sm:text-3xl font-semibold text-[#121417]">
                 {language === 'bs' ? dish.name : dish.nameEn}
               </h2>
-              <span className="font-serif text-2xl font-bold text-[#B66F52]">
+              <span className="font-serif text-2xl font-bold text-[#C5A059]">
                 {dish.price.toFixed(2)} KM
               </span>
             </div>
 
-            <p className="text-sm text-[#20221F]/80 leading-relaxed font-light">
+            <p className="text-sm text-[#121417]/80 leading-relaxed font-light">
               {language === 'bs' ? dish.description : dish.descriptionEn}
             </p>
           </div>
 
           {/* Quick Meta: Prep time, calories, dietary tags */}
-          <div className="flex flex-wrap items-center gap-4 text-xs text-[#59634A] bg-[#F7F4ED] p-3 rounded-xl border border-[#E9E1D4]">
+          <div className="flex flex-wrap items-center gap-4 text-xs text-[#121417] bg-[#FAF8F5] p-3 rounded-xl border border-[#E8E2D6]">
             <div className="flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-[#B66F52]" />
+              <Clock className="w-4 h-4 text-[#C5A059]" />
               <span>{dish.prepTimeMinutes} min {language === 'bs' ? 'pripreme' : 'prep time'}</span>
             </div>
             {dish.calories && (
               <div className="flex items-center gap-1.5">
-                <Flame className="w-4 h-4 text-[#B66F52]" />
+                <Flame className="w-4 h-4 text-[#C5A059]" />
                 <span>{dish.calories} kcal</span>
               </div>
             )}
             <div className="flex flex-wrap gap-1">
               {dish.dietaryTags.map((t) => (
-                <span key={t} className="px-2 py-0.5 rounded bg-white text-[#20221F] border border-[#E9E1D4] text-[10px] uppercase font-semibold">
+                <span key={t} className="px-2 py-0.5 rounded bg-white text-[#121417] border border-[#E8E2D6] text-[10px] uppercase font-semibold">
                   {t}
                 </span>
               ))}
@@ -134,10 +134,10 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({ dish, onClose 
 
           {/* Ingredients list */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#59634A] mb-1">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#C5A059] mb-1">
               {language === 'bs' ? 'Sastojci & Porijeklo' : 'Ingredients & Provenance'}
             </h4>
-            <p className="text-xs text-[#20221F]/70 leading-relaxed">
+            <p className="text-xs text-[#121417]/70 leading-relaxed">
               {language === 'bs' ? dish.ingredients : dish.ingredientsEn}
             </p>
           </div>
@@ -164,7 +164,7 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({ dish, onClose 
           {/* Variants Selector (if any) */}
           {dish.variants && dish.variants.length > 0 && (
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#59634A] mb-2">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#C5A059] mb-2">
                 {language === 'bs' ? 'Odaberite opciju / pečenje' : 'Select Variant / Doneness'}
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -175,13 +175,13 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({ dish, onClose 
                     onClick={() => setSelectedVariant(v)}
                     className={`p-3 rounded-xl border text-left text-xs font-medium flex items-center justify-between transition-colors ${
                       selectedVariant?.id === v.id
-                        ? 'border-[#B66F52] bg-[#B66F52]/5 text-[#20221F]'
-                        : 'border-[#E9E1D4] hover:bg-[#F7F4ED]'
+                        ? 'border-[#C5A059] bg-[#C5A059]/10 text-[#121417]'
+                        : 'border-[#E8E2D6] hover:bg-[#FAF8F5]'
                     }`}
                   >
                     <span>{language === 'bs' ? v.name : v.nameEn}</span>
                     {v.priceDelta > 0 && (
-                      <span className="font-semibold text-[#B66F52]">+{v.priceDelta.toFixed(2)} KM</span>
+                      <span className="font-semibold text-[#C5A059]">+{v.priceDelta.toFixed(2)} KM</span>
                     )}
                   </button>
                 ))}
@@ -192,7 +192,7 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({ dish, onClose 
           {/* Extras / Toppings Selector (if any) */}
           {dish.extras && dish.extras.length > 0 && (
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#59634A] mb-2">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#C5A059] mb-2">
                 {language === 'bs' ? 'Dodatni prilozi i dodaci' : 'Optional Add-ons & Extras'}
               </label>
               <div className="space-y-2">
@@ -205,19 +205,19 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({ dish, onClose 
                       onClick={() => toggleExtra(extra)}
                       className={`w-full p-3 rounded-xl border text-left text-xs font-medium flex items-center justify-between transition-colors ${
                         isChecked
-                          ? 'border-[#59634A] bg-[#59634A]/5 text-[#20221F]'
-                          : 'border-[#E9E1D4] hover:bg-[#F7F4ED]'
+                          ? 'border-[#C5A059] bg-[#C5A059]/10 text-[#121417]'
+                          : 'border-[#E8E2D6] hover:bg-[#FAF8F5]'
                       }`}
                     >
                       <div className="flex items-center gap-2.5">
                         <div className={`w-4 h-4 rounded border flex items-center justify-center ${
-                          isChecked ? 'bg-[#59634A] border-[#59634A] text-white' : 'border-stone-400'
+                          isChecked ? 'bg-[#C5A059] border-[#C5A059] text-[#121417]' : 'border-stone-400'
                         }`}>
-                          {isChecked && <Check className="w-3 h-3" />}
+                          {isChecked && <Check className="w-3 h-3 text-[#121417] stroke-[3]" />}
                         </div>
                         <span>{language === 'bs' ? extra.name : extra.nameEn}</span>
                       </div>
-                      <span className="font-semibold text-[#59634A]">+{extra.price.toFixed(2)} KM</span>
+                      <span className="font-semibold text-[#C5A059]">+{extra.price.toFixed(2)} KM</span>
                     </button>
                   );
                 })}
@@ -227,7 +227,7 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({ dish, onClose 
 
           {/* Special Preparation Instructions */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#59634A] mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#C5A059] mb-1.5">
               {language === 'bs' ? 'Posebne napomene za kuhinju' : 'Special Kitchen Instructions'}
             </label>
             <textarea
@@ -235,31 +235,31 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({ dish, onClose 
               onChange={(e) => setSpecialInstructions(e.target.value)}
               placeholder={language === 'bs' ? 'Npr. sos sa strane, bez bibera...' : 'e.g., dressing on the side, no pepper...'}
               rows={2}
-              className="w-full text-xs p-3 rounded-xl border border-[#E9E1D4] focus:outline-none focus:border-[#B66F52] bg-[#F7F4ED]/50"
+              className="w-full text-xs p-3 rounded-xl border border-[#E8E2D6] focus:outline-none focus:border-[#C5A059] bg-[#FAF8F5]/50"
             />
           </div>
 
         </div>
 
         {/* Modal Footer Controls */}
-        <div className="p-6 bg-[#F7F4ED] border-t border-[#E9E1D4] flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
+        <div className="p-6 bg-[#FAF8F5] border-t border-[#E8E2D6] flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
           
           {/* Quantity Controls */}
-          <div className="flex items-center border border-[#E9E1D4] bg-white rounded-xl p-1 shadow-sm w-full sm:w-auto justify-between sm:justify-start">
+          <div className="flex items-center border border-[#E8E2D6] bg-white rounded-xl p-1 shadow-sm w-full sm:w-auto justify-between sm:justify-start">
             <button
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
               disabled={quantity <= 1}
-              className="p-2 rounded-lg text-[#20221F] hover:bg-[#F7F4ED] disabled:opacity-40 transition-colors"
+              className="p-2 rounded-lg text-[#121417] hover:bg-[#FAF8F5] disabled:opacity-40 transition-colors"
               aria-label="Smanji količinu"
             >
               <Minus className="w-4 h-4" />
             </button>
-            <span className="w-12 text-center text-sm font-bold text-[#20221F]">
+            <span className="w-12 text-center text-sm font-bold text-[#121417]">
               {quantity}
             </span>
             <button
               onClick={() => setQuantity((q) => q + 1)}
-              className="p-2 rounded-lg text-[#20221F] hover:bg-[#F7F4ED] transition-colors"
+              className="p-2 rounded-lg text-[#121417] hover:bg-[#FAF8F5] transition-colors"
               aria-label="Povećaj količinu"
             >
               <Plus className="w-4 h-4" />
@@ -270,7 +270,7 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({ dish, onClose 
           <button
             onClick={handleAddToCart}
             disabled={!dish.isAvailable}
-            className="w-full sm:flex-1 py-3.5 px-6 rounded-xl bg-[#B66F52] hover:bg-[#96533A] disabled:bg-stone-300 text-white text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all shadow-md flex items-center justify-center gap-2"
+            className="w-full sm:flex-1 py-3.5 px-6 rounded-xl bg-[#C5A059] hover:bg-[#B38E46] disabled:bg-stone-300 text-[#121417] text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all shadow-md flex items-center justify-center gap-2"
           >
             <ShoppingBag className="w-4 h-4" />
             <span>

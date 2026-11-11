@@ -32,25 +32,25 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentTab }) => {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center flex flex-col items-center">
         
         {/* Subtle Overline Tag */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#59634A]/40 border border-[#59634A]/60 backdrop-blur-md mb-6">
-          <Sparkles className="w-3.5 h-3.5 text-[#B66F52]" />
-          <span className="text-xs uppercase tracking-[0.25em] font-medium text-[#E9E1D4]">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C5A059]/15 border border-[#C5A059]/40 backdrop-blur-md mb-6 shadow-xs">
+          <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+          <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#E8D7B8]">
             {language === 'bs' ? 'Savremena Mediteranska Gastronomija' : 'Contemporary Mediterranean Dining'}
           </span>
         </div>
 
         {/* Brand Headline */}
-        <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight text-[#F7F4ED] leading-[1.08] mb-6 uppercase">
+        <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight text-[#FAF8F5] leading-[1.08] mb-6 uppercase">
           {settings.name}
         </h1>
 
         {/* Tagline */}
-        <p className="font-serif italic text-xl sm:text-2xl md:text-3xl text-[#E9E1D4] max-w-2xl font-light mb-4">
+        <p className="font-serif italic text-xl sm:text-2xl md:text-3xl text-[#E8D7B8] max-w-2xl font-light mb-4">
           &ldquo;{language === 'bs' ? settings.tagline : settings.taglineEn}&rdquo;
         </p>
 
         {/* Short Description */}
-        <p className="text-sm sm:text-base text-[#E9E1D4]/80 max-w-xl font-light leading-relaxed mb-10">
+        <p className="text-sm sm:text-base text-[#FAF8F5]/80 max-w-xl font-light leading-relaxed mb-10">
           {language === 'bs'
             ? 'Smješten na obali Miljacke, Atelier Bistro donosi spoj jadranskog ulova, ručno rađene tjestenine i najfinijih odležalih odrezaka u ambijentu bezvremenske elegancije.'
             : 'Nestled along the Miljacka riverbank, Atelier Bistro unites fresh Adriatic seafood, handmade pastas, and prime dry-aged cuts within an ambiance of timeless editorial warmth.'}
@@ -64,9 +64,9 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentTab }) => {
               setCurrentTab('reservations');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#B66F52] hover:bg-[#96533A] text-white text-xs sm:text-sm font-semibold tracking-widest uppercase transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2.5"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#C5A059] hover:bg-[#B38E46] text-[#121417] text-xs sm:text-sm font-bold tracking-widest uppercase transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2.5"
           >
-            <Calendar className="w-4 h-4" />
+            <Calendar className="w-4 h-4 text-[#121417]" />
             <span>{language === 'bs' ? 'Rezerviši Sto' : 'Reserve a Table'}</span>
           </button>
 
@@ -76,9 +76,9 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentTab }) => {
               setCurrentTab('menu');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#F7F4ED] hover:bg-[#E9E1D4] text-[#20221F] text-xs sm:text-sm font-semibold tracking-widest uppercase transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2.5"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#FAF8F5] hover:bg-[#EDE7DD] text-[#121417] text-xs sm:text-sm font-bold tracking-widest uppercase transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2.5"
           >
-            <UtensilsCrossed className="w-4 h-4 text-[#59634A]" />
+            <UtensilsCrossed className="w-4 h-4 text-[#8E723B]" />
             <span>{language === 'bs' ? 'Istraži Meni' : 'Explore Menu'}</span>
           </button>
 
@@ -88,30 +88,30 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentTab }) => {
               setCurrentTab('order');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="w-full sm:w-auto px-6 py-4 rounded-xl bg-[#3F4734]/80 hover:bg-[#59634A] text-[#F7F4ED] text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all border border-[#59634A]/40 flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-6 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-[#FAF8F5] text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all border border-[#C5A059]/40 backdrop-blur-md flex items-center justify-center gap-2"
           >
-            <ShoppingBag className="w-4 h-4 text-[#B66F52]" />
+            <ShoppingBag className="w-4 h-4 text-[#C5A059]" />
             <span>{language === 'bs' ? 'Naruči Online' : 'Order Online'}</span>
           </button>
         </div>
 
         {/* Key Features Banner */}
-        <div className="mt-14 pt-8 border-t border-[#E9E1D4]/15 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-xs text-[#E9E1D4]/80">
+        <div className="mt-14 pt-8 border-t border-[#C5A059]/20 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-xs text-[#FAF8F5]/80">
           <div>
-            <span className="block font-serif text-lg text-[#F7F4ED] font-semibold">100% Svježe</span>
-            <span className="text-[11px] text-[#E9E1D4]/60">{language === 'bs' ? 'Jadranski ulov & domaće farme' : 'Daily Adriatic catch'}</span>
+            <span className="block font-serif text-xl text-[#C5A059] font-bold">100% Svježe</span>
+            <span className="text-[11px] text-[#FAF8F5]/70">{language === 'bs' ? 'Jadranski ulov & domaće farme' : 'Daily Adriatic catch'}</span>
           </div>
           <div>
-            <span className="block font-serif text-lg text-[#F7F4ED] font-semibold">30+ Dana</span>
-            <span className="text-[11px] text-[#E9E1D4]/60">{language === 'bs' ? 'Dry-aged goveđi odresci' : 'Dry-aged prime cuts'}</span>
+            <span className="block font-serif text-xl text-[#C5A059] font-bold">30+ Dana</span>
+            <span className="text-[11px] text-[#FAF8F5]/70">{language === 'bs' ? 'Dry-aged goveđi odresci' : 'Dry-aged prime cuts'}</span>
           </div>
           <div>
-            <span className="block font-serif text-lg text-[#F7F4ED] font-semibold">120+ Etiketa</span>
-            <span className="text-[11px] text-[#E9E1D4]/60">{language === 'bs' ? 'Vina regije i svijeta' : 'Selected international vintages'}</span>
+            <span className="block font-serif text-xl text-[#C5A059] font-bold">120+ Etiketa</span>
+            <span className="text-[11px] text-[#FAF8F5]/70">{language === 'bs' ? 'Vina regije i svijeta' : 'Selected international vintages'}</span>
           </div>
           <div>
-            <span className="block font-serif text-lg text-[#F7F4ED] font-semibold">4.9 &bull; ★★★★★</span>
-            <span className="text-[11px] text-[#E9E1D4]/60">{language === 'bs' ? 'Gastro Guide Sarajevo' : 'Verified Dining Reviews'}</span>
+            <span className="block font-serif text-xl text-[#C5A059] font-bold">4.9 &bull; ★★★★★</span>
+            <span className="text-[11px] text-[#FAF8F5]/70">{language === 'bs' ? 'Gastro Guide Sarajevo' : 'Verified Dining Reviews'}</span>
           </div>
         </div>
 

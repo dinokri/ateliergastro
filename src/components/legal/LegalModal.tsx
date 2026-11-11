@@ -156,37 +156,37 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
       <div 
-        className="bg-white text-[#20221F] w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl border border-[#E9E1D4] flex flex-col max-h-[85vh] animate-in zoom-in-95 duration-200"
+        className="bg-white text-[#121417] w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl border border-[#E8E2D6] flex flex-col max-h-[85vh] animate-in zoom-in-95 duration-200"
         role="dialog"
         aria-modal="true"
       >
-        <div className="p-6 bg-[#F7F4ED] border-b border-[#E9E1D4] flex items-center justify-between">
+        <div className="p-6 bg-[#FAF8F5] border-b border-[#E8E2D6] flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#59634A] text-white rounded-xl shadow-sm">
+            <div className="p-2.5 bg-[#121417] text-[#C5A059] rounded-xl shadow-sm">
               <Icon className="w-5 h-5" />
             </div>
-            <h2 className="font-serif text-xl font-semibold text-[#20221F]">
+            <h2 className="font-serif text-xl font-semibold text-[#121417]">
               {language === 'bs' ? current.titleBs : current.titleEn}
             </h2>
           </div>
 
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-stone-400 hover:text-[#20221F] hover:bg-[#E9E1D4] transition-colors"
+            className="p-2 rounded-xl text-stone-400 hover:text-[#121417] hover:bg-[#FAF8F5] transition-colors"
             aria-label="Zatvori prozor"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="p-6 sm:p-8 overflow-y-auto flex-1">
+        <div className="p-6 sm:p-8 overflow-y-auto flex-1 text-[#121417]">
           {language === 'bs' ? current.bodyBs : current.bodyEn}
         </div>
 
-        <div className="p-4 bg-[#F7F4ED] border-t border-[#E9E1D4] flex justify-end">
+        <div className="p-4 bg-[#FAF8F5] border-t border-[#E8E2D6] flex justify-end">
           <button
             onClick={onClose}
-            className="px-6 py-2.5 rounded-xl bg-[#20221F] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#B66F52] transition-colors"
+            className="px-6 py-2.5 rounded-xl bg-[#121417] hover:bg-[#C5A059] hover:text-[#121417] text-white text-xs font-semibold uppercase tracking-wider transition-colors"
           >
             {language === 'bs' ? 'Zatvori' : 'Close'}
           </button>

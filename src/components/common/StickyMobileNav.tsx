@@ -57,7 +57,7 @@ export const StickyMobileNav: React.FC<StickyMobileNavProps> = ({ currentTab, se
   ];
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#20221F]/95 backdrop-blur-lg border-t border-[#3F4734] px-2 py-1.5 shadow-2xl">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#121417]/95 backdrop-blur-lg border-t border-[#C5A059]/30 px-2 py-1.5 shadow-2xl">
       <div className="grid grid-cols-4 gap-1 items-center">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -68,10 +68,10 @@ export const StickyMobileNav: React.FC<StickyMobileNavProps> = ({ currentTab, se
               <button
                 key={item.id}
                 onClick={item.action}
-                className={`flex flex-col items-center justify-center py-1 px-1 rounded-xl transition-all ${
+                className={`flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all ${
                   isActive
-                    ? 'bg-[#B66F52] text-white shadow-md'
-                    : 'bg-[#59634A] text-[#F7F4ED] hover:bg-[#3F4734]'
+                    ? 'bg-[#C5A059] text-[#121417] shadow-md font-bold'
+                    : 'bg-[#C5A059]/90 text-[#121417] hover:bg-[#B38E46] font-bold'
                 }`}
                 aria-label={language === 'bs' ? item.labelBs : item.labelEn}
               >
@@ -88,14 +88,14 @@ export const StickyMobileNav: React.FC<StickyMobileNavProps> = ({ currentTab, se
               key={item.id}
               onClick={item.action}
               className={`relative flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-colors ${
-                isActive ? 'text-[#B66F52] font-semibold' : 'text-[#E9E1D4]/80 hover:text-white'
+                isActive ? 'text-[#C5A059] font-bold' : 'text-[#FAF8F5]/70 hover:text-white'
               }`}
               aria-label={language === 'bs' ? item.labelBs : item.labelEn}
             >
               <div className="relative">
                 <Icon className="w-5 h-5 mb-0.5" />
                 {item.badge !== undefined && (
-                  <span className="absolute -top-1.5 -right-2.5 bg-[#B66F52] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-[#20221F]">
+                  <span className="absolute -top-1.5 -right-2.5 bg-[#C5A059] text-[#121417] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-[#121417]">
                     {item.badge}
                   </span>
                 )}

@@ -3,20 +3,26 @@
 @theme {
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --color-ivory: #F7F4ED;
-  --color-charcoal: #20221F;
-  --color-olive: #59634A;
-  --color-olive-dark: #3F4734;
-  --color-terracotta: #B66F52;
-  --color-terracotta-dark: #96533A;
-  --color-beige: #E9E1D4;
+  --color-ivory: #FAF8F5;
+  --color-charcoal: #121417;
+  --color-charcoal-card: #1A1D22;
+  --color-gold: #C5A059;
+  --color-gold-hover: #B38E46;
+  --color-gold-light: #FBF7EE;
+  --color-gold-border: #E8D7B8;
+  --color-olive: #4A563E;
+  --color-olive-dark: #37412E;
+  --color-terracotta: #9B412D;
+  --color-terracotta-dark: #7F3423;
+  --color-sand: #EDE7DD;
+  --color-border: #E8E2D6;
 }
 
 @layer base {
   body {
     font-family: var(--font-sans);
-    background-color: #F7F4ED;
-    color: #20221F;
+    background-color: #FAF8F5;
+    color: #121417;
   }
   
   h1, h2, h3, h4, .font-serif-title {

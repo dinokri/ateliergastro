@@ -101,18 +101,18 @@ export const DigitalMenu: React.FC = () => {
   }, [menuItems, activeType, selectedCategory, searchQuery, selectedDietary, sortBy, categories, language]);
 
   return (
-    <div className="py-12 bg-[#F7F4ED] text-[#20221F] min-h-screen">
+    <div className="py-12 bg-[#FAF8F5] text-[#121417] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Title & Breadcrumb */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#B66F52] block mb-2">
+          <span className="text-xs uppercase tracking-[0.25em] font-bold text-[#8E723B] block mb-2">
             Haute Cuisine &bull; Sarajevo
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[#20221F]">
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[#121417]">
             {language === 'bs' ? 'Digitalni Meni' : 'A la Carte Digital Menu'}
           </h1>
-          <p className="text-xs sm:text-sm text-[#20221F]/70 mt-3 font-light leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#121417]/70 mt-3 font-light leading-relaxed">
             {language === 'bs'
               ? 'Istražite naša jela pripremljena od svježih lokalnih i jadranskih namirnica. Cijene su izražene u konvertibilnim markama (BAM / KM).'
               : 'Explore our artisanal culinary selections. All ingredients are locally sourced with sustainable Adriatic seafood.'}
@@ -120,11 +120,11 @@ export const DigitalMenu: React.FC = () => {
         </div>
 
         {/* Top Filter Bar: Type (Food vs Drinks), Search, Sort */}
-        <div className="bg-white p-4 sm:p-6 rounded-2xl border border-[#E9E1D4] shadow-sm mb-8 space-y-4">
+        <div className="bg-white p-5 sm:p-7 rounded-3xl border border-[#E8E2D6] shadow-[0_4px_24px_rgba(18,20,23,0.04)] mb-8 space-y-4">
           
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Food vs Drinks Tabs */}
-            <div className="flex items-center p-1 bg-[#F7F4ED] rounded-xl border border-[#E9E1D4] w-full md:w-auto">
+            <div className="flex items-center p-1 bg-[#FAF8F5] rounded-xl border border-[#E8E2D6] w-full md:w-auto">
               <button
                 onClick={() => {
                   setActiveType('all');
@@ -132,8 +132,8 @@ export const DigitalMenu: React.FC = () => {
                 }}
                 className={`flex-1 md:flex-none px-5 py-2 rounded-lg text-xs font-semibold tracking-wide transition-colors ${
                   activeType === 'all'
-                    ? 'bg-[#20221F] text-[#F7F4ED] shadow-sm'
-                    : 'text-[#20221F]/70 hover:text-[#20221F]'
+                    ? 'bg-[#121417] text-[#C5A059] shadow-xs font-bold'
+                    : 'text-[#121417]/70 hover:text-[#121417]'
                 }`}
               >
                 {language === 'bs' ? 'Sve (Hrana & Piće)' : 'All Offerings'}
@@ -145,8 +145,8 @@ export const DigitalMenu: React.FC = () => {
                 }}
                 className={`flex-1 md:flex-none px-5 py-2 rounded-lg text-xs font-semibold tracking-wide transition-colors ${
                   activeType === 'food'
-                    ? 'bg-[#59634A] text-white shadow-sm'
-                    : 'text-[#20221F]/70 hover:text-[#20221F]'
+                    ? 'bg-[#121417] text-[#C5A059] shadow-xs font-bold'
+                    : 'text-[#121417]/70 hover:text-[#121417]'
                 }`}
               >
                 {language === 'bs' ? 'Hrana' : 'Food'}
@@ -158,8 +158,8 @@ export const DigitalMenu: React.FC = () => {
                 }}
                 className={`flex-1 md:flex-none px-5 py-2 rounded-lg text-xs font-semibold tracking-wide transition-colors ${
                   activeType === 'drinks'
-                    ? 'bg-[#B66F52] text-white shadow-sm'
-                    : 'text-[#20221F]/70 hover:text-[#20221F]'
+                    ? 'bg-[#121417] text-[#C5A059] shadow-xs font-bold'
+                    : 'text-[#121417]/70 hover:text-[#121417]'
                 }`}
               >
                 {language === 'bs' ? 'Pića & Vina' : 'Drinks & Wines'}
@@ -175,7 +175,7 @@ export const DigitalMenu: React.FC = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={language === 'bs' ? 'Pretraži jela, sastojke...' : 'Search dishes, ingredients...'}
-                  className="w-full text-xs pl-9 pr-3 py-2.5 rounded-xl border border-[#E9E1D4] focus:outline-none focus:border-[#B66F52] bg-[#F7F4ED]/50"
+                  className="w-full text-xs pl-9 pr-3 py-2.5 rounded-xl border border-[#E8E2D6] focus:outline-none focus:border-[#C5A059] bg-[#FAF8F5]/80 text-[#121417]"
                 />
                 {searchQuery && (
                   <button
@@ -190,11 +190,11 @@ export const DigitalMenu: React.FC = () => {
 
               {/* Sort Selector */}
               <div className="flex items-center gap-2 w-full sm:w-auto">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-[#59634A] shrink-0 hidden sm:block" />
+                <SlidersHorizontal className="w-3.5 h-3.5 text-[#8E723B] shrink-0 hidden sm:block" />
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="w-full sm:w-auto text-xs py-2.5 px-3 rounded-xl border border-[#E9E1D4] focus:outline-none focus:border-[#B66F52] bg-white text-[#20221F] font-medium"
+                  className="w-full sm:w-auto text-xs py-2.5 px-3 rounded-xl border border-[#E8E2D6] focus:outline-none focus:border-[#C5A059] bg-white text-[#121417] font-semibold"
                 >
                   <option value="recommended">{language === 'bs' ? 'Preporučeno' : 'Recommended'}</option>
                   <option value="price_asc">{language === 'bs' ? 'Cijena: Manja ka većoj' : 'Price: Low to High'}</option>
@@ -210,10 +210,10 @@ export const DigitalMenu: React.FC = () => {
           <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar">
             <button
               onClick={() => setSelectedCategory('all')}
-              className={`shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-colors ${
+              className={`shrink-0 px-4 py-2 rounded-xl text-xs font-semibold transition-colors ${
                 selectedCategory === 'all'
-                  ? 'bg-[#20221F] text-white'
-                  : 'bg-[#F7F4ED] text-[#20221F]/80 hover:bg-[#E9E1D4]'
+                  ? 'bg-[#121417] text-[#C5A059] shadow-xs'
+                  : 'bg-[#FAF8F5] text-[#121417]/80 hover:bg-[#EDE7DD] border border-[#E8E2D6]'
               }`}
             >
               {language === 'bs' ? 'Sve Kategorije' : 'All Categories'} ({menuItems.length})
@@ -224,10 +224,10 @@ export const DigitalMenu: React.FC = () => {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-colors ${
+                  className={`shrink-0 px-4 py-2 rounded-xl text-xs font-semibold transition-colors ${
                     selectedCategory === cat.id
-                      ? 'bg-[#59634A] text-white font-semibold'
-                      : 'bg-[#F7F4ED] text-[#20221F]/80 hover:bg-[#E9E1D4]'
+                      ? 'bg-[#121417] text-[#C5A059] shadow-xs border border-[#C5A059]/40'
+                      : 'bg-[#FAF8F5] text-[#121417]/80 hover:bg-[#EDE7DD] border border-[#E8E2D6]'
                   }`}
                 >
                   {language === 'bs' ? cat.name : cat.nameEn} ({count})
@@ -237,9 +237,9 @@ export const DigitalMenu: React.FC = () => {
           </div>
 
           {/* Dietary Filter Pills */}
-          <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-[#E9E1D4]/50">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#59634A] mr-2 flex items-center gap-1">
-              <Filter className="w-3 h-3" />
+          <div className="flex flex-wrap items-center gap-1.5 pt-3 border-t border-[#E8E2D6]/60">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#8E723B] mr-2 flex items-center gap-1">
+              <Filter className="w-3 h-3 text-[#C5A059]" />
               <span>{language === 'bs' ? 'Filteri ishrane:' : 'Dietary:'}</span>
             </span>
             {dietaryOptions.map((opt) => {
@@ -248,13 +248,13 @@ export const DigitalMenu: React.FC = () => {
                 <button
                   key={opt.tag}
                   onClick={() => toggleDietaryFilter(opt.tag)}
-                  className={`text-[11px] px-2.5 py-1 rounded-lg border transition-colors flex items-center gap-1 ${
+                  className={`text-[11px] px-3 py-1 rounded-lg border transition-colors flex items-center gap-1 ${
                     active
-                      ? 'bg-[#B66F52] text-white border-[#B66F52] font-semibold'
-                      : 'bg-white text-[#20221F]/70 border-[#E9E1D4] hover:bg-[#F7F4ED]'
+                      ? 'bg-[#121417] text-[#C5A059] border-[#C5A059]/60 font-bold shadow-xs'
+                      : 'bg-white text-[#121417]/70 border-[#E8E2D6] hover:bg-[#FAF8F5]'
                   }`}
                 >
-                  {active && <Check className="w-3 h-3" />}
+                  {active && <Check className="w-3 h-3 text-[#C5A059]" />}
                   <span>{language === 'bs' ? opt.labelBs : opt.labelEn}</span>
                 </button>
               );
@@ -263,7 +263,7 @@ export const DigitalMenu: React.FC = () => {
             {selectedDietary.length > 0 && (
               <button
                 onClick={() => setSelectedDietary([])}
-                className="text-[11px] text-[#B66F52] hover:underline font-semibold ml-2"
+                className="text-[11px] text-[#9B412D] hover:underline font-bold ml-2"
               >
                 {language === 'bs' ? 'Poništi filtere' : 'Clear filters'}
               </button>
@@ -322,11 +322,11 @@ export const DigitalMenu: React.FC = () => {
             {filteredItems.map((dish) => (
               <article
                 key={dish.id}
-                className="group bg-white rounded-2xl overflow-hidden border border-[#E9E1D4] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                className="group bg-white rounded-3xl overflow-hidden border border-[#E8E2D6] shadow-[0_4px_24px_rgba(18,20,23,0.04)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   {/* Dish Image */}
-                  <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-[#E9E1D4]/40">
+                  <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-[#EDE7DD]/40">
                     <img
                       src={dish.imageUrl}
                       alt={language === 'bs' ? dish.name : dish.nameEn}
@@ -341,25 +341,25 @@ export const DigitalMenu: React.FC = () => {
                     {/* Floating Badges */}
                     <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
                       {dish.isChefRecommendation && (
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#59634A] text-white shadow-sm">
+                        <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#121417]/95 text-[#C5A059] border border-[#C5A059]/40 shadow-xs backdrop-blur-sm">
                           {language === 'bs' ? 'Šef Preporučuje' : 'Chef Pick'}
                         </span>
                       )}
                       {dish.isBestseller && (
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#B66F52] text-white shadow-sm">
+                        <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#9B412D] text-white shadow-xs">
                           Bestseller
                         </span>
                       )}
                       {dish.isNew && (
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-700 text-white shadow-sm">
+                        <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#8E723B] text-white shadow-xs">
                           {language === 'bs' ? 'Novo' : 'New'}
                         </span>
                       )}
                     </div>
 
                     {/* Price Badge */}
-                    <div className="absolute bottom-3 right-3 bg-[#20221F]/90 backdrop-blur-md text-[#F7F4ED] px-3 py-1 rounded-xl font-serif text-lg font-bold shadow-md">
-                      {dish.price.toFixed(2)} KM
+                    <div className="absolute bottom-3 right-3 bg-[#121417]/95 backdrop-blur-md text-[#FAF8F5] border border-[#C5A059]/30 px-3 py-1 rounded-xl font-serif text-lg font-bold shadow-md">
+                      {dish.price.toFixed(2)} <span className="text-xs font-sans text-[#C5A059]">KM</span>
                     </div>
 
                     {!dish.isAvailable && (
@@ -372,30 +372,30 @@ export const DigitalMenu: React.FC = () => {
                   </div>
 
                   {/* Body Content */}
-                  <div className="p-5">
+                  <div className="p-5 sm:p-6">
                     {/* Dietary tags */}
-                    <div className="flex flex-wrap gap-1 mb-2">
+                    <div className="flex flex-wrap gap-1 mb-2.5">
                       {dish.dietaryTags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="text-[10px] tracking-wide uppercase px-2 py-0.5 rounded bg-[#F7F4ED] text-[#59634A] font-medium border border-[#E9E1D4]"
+                          className="text-[10px] tracking-wide uppercase px-2 py-0.5 rounded-md bg-[#FAF8F5] text-[#8E723B] font-semibold border border-[#E8E2D6]"
                         >
                           {tag}
                         </span>
                       ))}
                       {dish.prepTimeMinutes && (
-                        <span className="text-[10px] text-stone-500 flex items-center gap-1 ml-auto">
-                          <Clock className="w-3 h-3" />
+                        <span className="text-[10px] text-stone-400 flex items-center gap-1 ml-auto">
+                          <Clock className="w-3 h-3 text-[#C5A059]" />
                           <span>{dish.prepTimeMinutes}m</span>
                         </span>
                       )}
                     </div>
 
-                    <h3 className="font-serif text-xl font-semibold text-[#20221F] mb-1.5 group-hover:text-[#B66F52] transition-colors">
+                    <h3 className="font-serif text-xl font-semibold text-[#121417] mb-1.5 group-hover:text-[#C5A059] transition-colors">
                       {language === 'bs' ? dish.name : dish.nameEn}
                     </h3>
 
-                    <p className="text-xs text-[#20221F]/70 line-clamp-2 leading-relaxed mb-3 font-light">
+                    <p className="text-xs text-[#121417]/70 line-clamp-2 leading-relaxed mb-3 font-light">
                       {language === 'bs' ? dish.shortDescription : dish.shortDescriptionEn}
                     </p>
 
@@ -410,19 +410,19 @@ export const DigitalMenu: React.FC = () => {
                 </div>
 
                 {/* Card Action Buttons */}
-                <div className="px-5 pb-5 pt-2 border-t border-[#E9E1D4]/40 flex items-center justify-between gap-2.5">
+                <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-2 border-t border-[#E8E2D6]/50 flex items-center justify-between gap-2.5">
                   <button
                     onClick={() => setSelectedDish(dish)}
-                    className="flex-1 py-2 px-3 rounded-xl border border-[#E9E1D4] hover:bg-[#F7F4ED] text-xs font-semibold text-[#20221F] flex items-center justify-center gap-1.5 transition-colors"
+                    className="flex-1 py-2.5 px-3 rounded-xl border border-[#E8E2D6] hover:bg-[#FAF8F5] text-xs font-semibold text-[#121417] flex items-center justify-center gap-1.5 transition-colors"
                   >
-                    <Eye className="w-3.5 h-3.5 text-[#59634A]" />
+                    <Eye className="w-3.5 h-3.5 text-[#8E723B]" />
                     <span>{language === 'bs' ? 'Detalji' : 'View'}</span>
                   </button>
 
                   <button
                     onClick={() => addToCart(dish, 1)}
                     disabled={!dish.isAvailable}
-                    className="py-2 px-3.5 rounded-xl bg-[#59634A] hover:bg-[#3F4734] disabled:bg-stone-300 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-sm"
+                    className="py-2.5 px-4 rounded-xl bg-[#121417] hover:bg-[#C5A059] hover:text-[#121417] disabled:bg-stone-300 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-sm"
                     aria-label={`Dodaj ${dish.name} u korpu`}
                   >
                     <Plus className="w-4 h-4" />
